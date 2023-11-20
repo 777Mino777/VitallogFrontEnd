@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,55 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* .App {
+  text-align: center;
 }
+
+.App-header {
+  background-color: #282c34;
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.App-header nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.App-header nav ul li {
+  padding: 20px;
+}
+
+.App-header button {
+  background-color: #61dafb;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.App-main {
+  margin: 20px;
+  padding: 20px;
+}
+
+.App-main h1 {
+  color: #61dafb;
+}
+
+.App-main p {
+  color: #666;
+}
+
+.App-main button {
+  background-color: #61dafb;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+} */
