@@ -12,21 +12,29 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   
+  const backToMainPage = () => {
+    navigate('/main');
+  }
+  const GoToRegisterPage = () => {
+    navigate('/register')
+  }
   const handleLogin = async (e) => {
+    console.log("1234")
     e.preventDefault();
     if (!id || !password) {
       setError('아이디와 비밀번호를 모두 입력해주세요.');
       setShowModal(true);
       return;
     }
-
+  
     let url =`http://10.125.121.216:8080/login` ;
         e.preventDefault();
         axios
         .post(url, {id, password})
                 .then(function (response) {
-                  if(response.status===200){
-                    localStorage.setItem('token', response.data.token);
+                  if(response.status === 200) {
+                    localStorage.setItem('id', id);
+                    localStorage.setItem('token', response.headers.get("Authorization"));
                     navigate('/user');
                   }
                       console.log("성공", response.status);
@@ -37,33 +45,16 @@ const LoginPage = () => {
                       // 오류발생시 실행
                       setError('로그인 실패');
                       setShowModal(true);
-                      // console.log("실패", error);
-                  });
-                  // .then(function () {
+                      console.log("실패", error);
+                  })
+                  .then(function () {
                       // 항상 실행
-                      // console.log("데이터 요청 완료");
-                  // });
+                      console.log("데이터 요청 완료");
+                  });
 
   
   };
-
-  const isLoggedIn = () => {
-    return localStorage.getItem('token') != null;
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-  }
-
-  
-
-  const backToMainPage = () => {
-    navigate('/main');
-  }
-  const GoToRegisterPage = () => {
-    // navigate('/register')
-  }
+//
 
 
   return (
@@ -74,7 +65,7 @@ const LoginPage = () => {
         <h1 onClick={backToMainPage} className="text-5xl hover:cursor-pointer hover:scale-x-110 transition-all hover:text-custom-blue font-bold mb-12">Vital Log</h1>
         <h2 className="text-2xl mb-9 font-bold">Login</h2>
           {error && <p className="text-red-500">{error}</p>}
-        <form>
+        <form onSubmit={handleLogin}>
           <InputField 
             id="id"
             label="ID"
@@ -94,8 +85,7 @@ const LoginPage = () => {
           <div className="flex justify-center mb-2 mt-8">
             <button
               className="bg-custom-blue hover:bg-sky-400 text-white font-bold py-2 px-9 rounded-xl focus:outline-none focus:shadow-outline w-full"
-              type="button"
-              onClick={handleLogin}
+              type="submit"          
             >
               Sign in
             </button>
@@ -103,7 +93,10 @@ const LoginPage = () => {
             <div>
             </div>
             <div className="text-center">
-            <button onClick={GoToRegisterPage} className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+            <button onClick={GoToRegisterPage}
+                    className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                    type="button"
+                    >
               회원가입
             </button>
             </div>

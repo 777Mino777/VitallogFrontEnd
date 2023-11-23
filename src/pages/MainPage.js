@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import VlogNav from "./VlogNav";
+import { useEffect } from "react";
 const MainPage = () => {
 
     const navigate = useNavigate();
@@ -11,8 +12,8 @@ const MainPage = () => {
     return (
         <div className="max-w-[1820px] mx-auto">
         <div className="flex flex-col min-h-screen bg-white text-gray-800">
-            <header className="p-2 sm:p-6">
-                <VlogNav />
+            <header className="p-4 sm:p-6">
+                <VlogNav isUserPage={false}/>
             </header>
             <main className="flex-grow flex flex-col mx-auto justify-center items-center text-center p-4 sm:p-20">
                 <h1 className="text-xl sm:text-8xl font-bold py-10">

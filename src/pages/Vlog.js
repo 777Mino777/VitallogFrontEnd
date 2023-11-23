@@ -8,33 +8,32 @@ import InformationPage from "./InformationPage"
 import MyPage from "./MyPage"
 const Vlog = () => {
 
-  const isLoggedIn = () => {
-    return localStorage.getItem('token') != null;
-  };
+  // const isLoggedIn = () => {
+  //   return localStorage.getItem('token') != null;
+  // };
 
   return (
     <Router>
       <div>
-        {isLoggedIn() ? (
+        {/* { isLoggedIn() ? ( */}
           <Routes>
-            {/* 로그인 상태에서 보여줄 페이지 */}
+            로그인 상태에서 보여줄 페이지
             <Route path="/user" element={<UserPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/community" element={<CommunityPage />} />
             <Route path="/information" element={<InformationPage />} />
           </Routes>
-        ) : (
-          // 로그아웃 상태에서 보여줄 페이지
-          <Routes>
+        {/* ) : ( */}
+         <Routes>
             <Route path="/main" element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/information" element={<InformationPage />} />
           </Routes>
-        )}
+        {/* ) } */}
       </div>
     </Router>
-  );
+         );
 };
 
 export default Vlog

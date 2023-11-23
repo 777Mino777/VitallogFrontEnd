@@ -11,6 +11,7 @@ const RegisterPage = () => {
     const [name, setName] = useState('');
     const [modalMessage, setModalMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const navigate = useNavigate();
 
@@ -27,6 +28,12 @@ const RegisterPage = () => {
 
         if (!id || !password || !name) {
             setModalMessage('모든 정보를 입력해주세요.');
+            setShowModal(true);
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setModalMessage('패스워드가 일치하지 않습니다.');
             setShowModal(true);
             return;
         }
@@ -76,6 +83,14 @@ const RegisterPage = () => {
                         placeholder="패스워드를 입력하세요."
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                    />
+                     <InputField
+                        label="CONFIRM PASSWORD"
+                        id="confirmpassword"
+                        type="password"
+                        placeholder="패스워드를 한번 더 입력하세요."
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <InputField
                         label="NAME"
