@@ -52,7 +52,7 @@ const UserPage = () => {
         <header className="p-2 sm:p-6">
           <VlogNav isUserPage={true} />
         </header>
-        <main className="flex my-0.5 py-12">
+        <main className="flex my-0.5 py-14">
           <div className="mx-10 bg-custom-gradient border-4 mb-1 border-black bg-white rounded-xl shadow-md relative sm:w-1/4 md:w-2/3 lg:w-1/2 xl:w-2/3 3xl:w-1/5">
             <div className="flex">
               <button className=" bg-white m-24 p-1 border-4  border-black rounded-[50%] w-53 h-48">
@@ -71,7 +71,7 @@ const UserPage = () => {
               {filledExerciseRecords.map((record, index) => (
                 <div key={index} className="flex items-center space-x-16 bg-white sm:text-xl hover:bg-sky-100 text-black border-4 border-black font-bold py-2 px-8 sm:px-10 rounded-xl">
                   {/* 이 밑의 div 4개 */}
-                  <div className="mx-2 flex">{record.exerDate ?  `${record.exerDate}` : '🏃‍♂️\u00A0'}</div>
+                  <div className="mx-2 flex">{record.exerDate ? `${record.exerDate}` : '🏃‍♂️\u00A0'}</div>
                   <div className="flex-1">{record.exercise ? `${record.exercise}` : '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 운동기록을 채워봐요! \u00A0\u00A0\u00A0\u00A0'}</div>
                   <div className="flex">{record.exerTime ? `${record.exerTime}분` : ' '}</div>
                   <div className="flex">{record.kcal ? `${record.kcal}kcal` : '\u00A0🏃‍♀️'}</div>
@@ -79,7 +79,7 @@ const UserPage = () => {
               ))
               }
             </div>
-            
+
           </div>
           <div className="flex-grow flex flex-col mx-auto justify-center items-center text-center p-4 sm:p-20">
             <h1 className="text-xl sm:text-8xl font-bold">
