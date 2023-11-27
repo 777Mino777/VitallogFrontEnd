@@ -20,6 +20,10 @@ const InformationPage = () => {
   //   },
   // ];
   
+  const isLoggedIn = () => {
+    return localStorage.getItem('token') != null;
+  }
+
   const heightInMeters = height / 100;
   const checkBmi = height && weight ? (weight / (heightInMeters * heightInMeters)).toFixed(2) : " ";
   
@@ -46,12 +50,8 @@ const InformationPage = () => {
   const bmi = calcBmi(height, weight);
   const handleView = async () => {
 
-
-    // const testage = calcAge(age);
-    // const testbmi = '정상';
     console.log(age)
 
-    // setUserInfo();
 
     const url = `http://10.125.121.216:8080/api/vitallog/information?age=${age}&bmi=${bmi}&gender=${gender}`
 
@@ -62,25 +62,19 @@ const InformationPage = () => {
       .catch((error) => console.error('Error', error));
     
    
-    /*
-    try {
-      const response = await axios.get(`http://10.125.121.216:8080/api/vitallog/information?age='10대'&bmi=''&gender='${gender}'`, {
-        params: { age, bmi, gender }
-      });
-      // 예상 응답 형태: [{ gender: '여자', age: '30', height: '160', weight: '55' }, ...]
-      setUserInfo(response.data);
-    } catch (error) {
-      console.error('There was an error fetching the user info:', error);
-    }
-    */
+
   };
 
   return (
     <div className="max-w-[1820px] mx-auto">
       <div className="flex flex-col min-h-screen bg-white text-gray-800">
         <header className="p-2 sm:p-6">
-          <VlogNav />
-        </header>
+          { isLoggedIn ?
+          <VlogNav isUserPage={true}/>
+          :
+          <VlogNav isUserPage={false}/>
+          }
+          </header>
         <h1 className="mx-16 pb-4 pt-10 text-gray-400 font-bold">선택하지 않은 경우 모든 옵션을 포함하는 정보를 볼 수 있습니다.</h1>
         <div className="form flex justify-center pb-20">
           <table className="flex justify-around">
