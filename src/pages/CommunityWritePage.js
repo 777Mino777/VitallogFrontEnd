@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 const CommunityWritePage = () => {
 
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [contents, setContents] = useState('');
+    const createDate = new Date().toISOString().split('T')[0];
     const navigate = useNavigate();
 
     const writer = localStorage.getItem("id");
@@ -13,27 +14,28 @@ const CommunityWritePage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // const createDate = new Date().toISOString().split('T')[0];
-
-
-        console.log('제목:', title);
-        console.log('내용:', content);
+        const Authorization = localStorage.getItem("token");
 
         const post = {
             title: title,
-            contents: content,
+            createDate: createDate,
+            contents: contents,
+            writer: writer,
         };
 
-        fetch('http://10.125.121.216:8080/api/vitallog/write', {
+        fetch('http://10.125.121.216:8080/api/vitallog/community/write', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": Authorization,
             },
             body: JSON.stringify(post)
+            // body: formData
         })
-            .then(response => response.json())
+            .then(response => response
+            )
             .then(data => {
-                console.log(data);
+                // console.log(data);
 
                 navigate('/community')
             })
@@ -56,7 +58,7 @@ const CommunityWritePage = () => {
                         <div className="">
 
                             <div className="mx-2 text-4xl flex justify-end font-extrabold text-white">
-                                {new Date().toISOString().split('T')[0]}
+                                {createDate}
                             </div>
                             <div className="mt-2 flex justify-end text-xl">
                                 <label htmlFor="writer" className="border-4 font-extrabold border-sky-200 rounded-xl px-3 bg-white text-blue">작성자 : {writer}</label>
@@ -77,13 +79,13 @@ const CommunityWritePage = () => {
                             />
                         </div>
                         <div className="">
-                            <label htmlFor="content" className="shadow-inner rounded-xl bg-white border-4 border-sky-200 mt-4 mb-4 w-12 block text-lg font-extrabold text-black">내용</label>
+                            <label htmlFor="contents" className="shadow-inner rounded-xl bg-white border-4 border-sky-200 mt-4 mb-4 w-12 block text-lg font-extrabold text-black">내용</label>
                             <textarea
-                                id="content"
-                                name="content"
+                                id="contents"
+                                name="contents"
                                 rows={15}
-                                value={content}
-                                onChange={(e) => setContent(e.target.value)}
+                                value={contents}
+                                onChange={(e) => setContents(e.target.value)}
                                 className="px-2 placeholder-center font-extrabold rounded-lg border-4 mr-24 block w-full border-sky-200 shadow-sm"
                                 placeholder="내용을 입력하세요"
                                 required
@@ -92,7 +94,7 @@ const CommunityWritePage = () => {
                         <div className="flex justify-end">
                             <button
                                 type="submit"
-                                className="placeholder w-36 mt-4 flex justify-center py-2 px-4 border-8 border-sky-700 text-2xl font-extrabold rounded-md text-white bg-custom-blue transition duration-300 hover:text-custom-blue hover:bg-white"
+                                className="placeholder w-36 mt-4 flex justify-center py-2 px-4 border-8 border-custom-blue text-2xl font-extrabold rounded-md text-white bg-custom-blue transition duration-300 hover:text-custom-blue hover:bg-white"
                             >
                                 글쓰기
                             </button>
