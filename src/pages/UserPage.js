@@ -91,7 +91,7 @@ const UserPage = () => {
               <p className="text-md sm:text-xl mb-3 sm:mb-3 font-bold">운동의 순간, 미래의 당신을 위한 건강일지입니다.</p>
             </div>
             <div className="w-full flex justify-center items-center">
-              <button onClick={GoToMyPage} className="bg-white text-md sm:text-xl hover:bg-sky-100 text-black border border-custom-blue font-bold py-2 px-8 sm:px-10 rounded-3xl">
+              <button onClick={GoToMyPage} className="bg-white text-md sm:text-xl hover:bg-sky-100 text-black border-4 border-custom-blue font-extrabold py-2 px-8 sm:px-10 rounded-3xl">
                 My Page &gt;
               </button>
             </div>

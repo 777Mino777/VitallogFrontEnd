@@ -22,7 +22,7 @@ const Vlog = () => {
             로그인 상태에서 보여줄 페이지
             <Route path="/user" element={<UserPage />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/community/board" element={<CommunityPage />} />
+            <Route path="/community" element={<CommunityPage />} />
             <Route path="/community/write" element={<CommunityWritePage />}/>
             <Route path="/community/detail" element={<CommunityDetailPage />} />
             <Route path="/information" element={<InformationPage />} />
