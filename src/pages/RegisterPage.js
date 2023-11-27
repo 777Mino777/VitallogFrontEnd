@@ -16,7 +16,7 @@ const RegisterPage = () => {
     const navigate = useNavigate();
 
     const backToMainPage = () => {
-        navigate("/main");
+        navigate("/");
     }
 
     const backToLoginPage = () => {

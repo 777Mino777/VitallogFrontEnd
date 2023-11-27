@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [showModal, setShowModal] = useState(false);
   
   const backToMainPage = () => {
-    navigate('/main');
+    navigate('/');
   }
   const GoToRegisterPage = () => {
     navigate('/register')
