@@ -11,12 +11,12 @@ const CommunityPage = () => {
     
     const fetchPosts = async () => {
       try {
-        const response = await fetch('api/vitallog/community/board');
+        const response = await fetch('http://10.125.121.216:8080/api/vitallog/community/board');
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
         const data = await response.json();
-        setPosts(data);
+        setPosts([...data].reverse());
       } catch (error) {
         console.error("Fetch error:", error);
       }
@@ -33,7 +33,7 @@ const CommunityPage = () => {
     navigate(`/community/detail/${postid}`);
   }
 
-  // let varWrites = 30;
+  // let varWrites = 1;
 
 
 
@@ -50,14 +50,14 @@ const CommunityPage = () => {
             <main className="flex-grow overflow-auto">
                <div className="grid grid-cols-4 gap-4 ml-32 mx-8">
                 {posts.map((post,index) => (
-                <div
+                <button
                   key={post.id}
                   onClick={() => handlePostClick(post.id)}
                   className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white w-80 px-20 py-36 border-custom-blue transition duration-300 hover:bg-sky-100"
                   >
                   <h3 className="text-lg font-bold">{post.title}</h3>
-                  <p>{post.content}</p>                   
-                </div>
+                  <p>{post.contents}</p>                   
+                </button>
 ))}
                 {/* {Array.from({ length : varWrites }, (_, index) => (
                       <div key={index} className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white w-80 px-20 py-36 border-custom-blue transition duration-300 hover:bg-sky-100">
