@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import VlogNav from './VlogNav';
+import CommentWrite from '../components/CommentWrite';
+import CommentList from '../components/CommentList';
 
 const CommunityDetailPage = () => {
   const [post, setPost] = useState(null);
@@ -8,6 +10,13 @@ const CommunityDetailPage = () => {
   const [error, setError] = useState(null);
   const { postid } = useParams();
   
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+
+  const createDate = new Date().toISOString();
+  const Authorization = localStorage.getItem('token')
+  const userid = localStorage.getItem('id');
+
   let isCancelled = false;
   
   useEffect(() => {
@@ -36,18 +45,45 @@ const CommunityDetailPage = () => {
     };
   }, [postid]);
 
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setComments(data);
+        console.log("comments",data)
+      } catch (error) {
+        setError(error.message);
+      }
+    };
 
-  const addComment = () => {
-    setComments([...comments, newComment]);
-    setNewComment('');
+    fetchComments();
+  }, [postid]);
+
+  const addComment = async (commentContent) => {
+    try {
+      const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`, {
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json',
+          'Authorization' : Authorization,
+        },
+        body : JSON.stringify({ 
+          "writer" : userid,
+          "contents" : commentContent,
+          "createDate" : createDate, 
+        }),
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+      const newCommentData = await response.json();
+      console.log("resp",newCommentData)
+      setComments(newCommentData);
+    } catch (error) {
+      setError(error.message);
+    }
+
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addComment();
-  }
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -67,35 +103,16 @@ const CommunityDetailPage = () => {
               </div>
               <h1 className="border-4 border-sky-200 bg-white rounded-xl text-4xl font-bold mb-12">{post.title}</h1>
               <div>
-                <div className="flex text-start border-4 border-sky-200 bg-white rounded-xl text-lg"><pre>{post.contents}</pre></div>
+                <div className="flex text-start border-4 border-sky-200 bg-white rounded-xl text-lg"><pre className='font-omyu_pretty' >{post.contents}</pre></div>
                 <p className="font-bold text-2xl text-right mt-12">{new Date(post.createDate).toLocaleDateString()}</p>
               </div>
             </div>
           )}
         </main>
         {/* 댓글 입력 */}
-        <div className='font-omyu_pretty mt-6'>
-          <form onSubmit={handleSubmit} className='flex'>
-            <input
-              type="text"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder='댓글을 입력하세요'
-              className='ml-48 mt-4 text-xl placeholder-center rounded-lg border-4 border-custom-blue w-full'
-            />
-            <button type='submit' className='mr-48 mx-6 w-96 text-2xl mt-4 py-4 rounded-lg border-4 border-custom-blue bg-custom-blue text-white transition duration-300 hover:border-custom-blue hover:bg-white hover:text-custom-blue'>
-              등록
-            </button>
-          </form>
-        </div>
+        <CommentWrite postid={postid} onCommentSubmit={addComment} />
         {/* 댓글 목록 */}
-        <div className='mt-4 mx-48'>
-          {comments.map((comments, index) => (
-            <div key={index} className='border-t border-sky-200 mt-2 pt-2'>
-              {comments}
-            </div>
-          ))}
-        </div>
+        <CommentList comments={comments}/>
       </div>
     </div>
   );
