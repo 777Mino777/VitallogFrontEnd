@@ -64,24 +64,24 @@ const CommunityPage = () => {
           <header className="p-6">
             <VlogNav isUserPage={true} />
           </header>
-          <div className="font-omyu_pretty flex ml-44 mt-20 justify-between">
+          <div className="font-omyu_pretty flex w-full mt-20 justify-between">
             <div>
-              <form>
+              <form className="pl-48">
               <select
                 value={searchType}
                 onChange={(e) => setSearchType(e.target.value)}
-                className="text-center w-48 mr-2 rounded-lg py-4 text-2xl border-8 border-custom-blue"
+                className="text-center px-4 mr-2 rounded-lg py-4 text-2xl border-8 border-custom-blue"
               >
                 <option value="all">제목+작성자</option>
                 <option value="title">제목</option>
-                <option value="wrtier">작성자</option>
+                <option value="writer">작성자</option>
               </select>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="검색어 입력"
-                className="text-2xl placeholder-center ml-2 px-48 border-8 border-custom-blue py-3 rounded-lg"
+                className="text-2xl w-96 px-2 placeholder:text-center border-8 border-custom-blue py-3 rounded-lg"
               />
               <button
 
@@ -89,13 +89,13 @@ const CommunityPage = () => {
                   e.preventDefault();
                   handleSearch();
                 }}
-                className="font-bold text-2xl rounded-lg py-3 px-24 ml-4 border-8 border-custom-blue bg-custom-blue text-white transition duration-200 hover:border-sky-400 hover:bg-sky-400"
+                className="font-bold text-2xl rounded-lg ml-2 px-16 py-3 border-8 border-custom-blue bg-custom-blue text-white transition duration-200 hover:border-sky-400 hover:bg-sky-400"
               >
                 검색
               </button>
             </form>
             </div>
-            <button onClick={handleCommunityWrite} className="font-extrabold text-3xl mb-10 mr-40 py-3 w-60 rounded-xl border-8 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
+            <button onClick={handleCommunityWrite} className="font-extrabold text-3xl mb-10 mr-40 py-3 px-16 rounded-xl border-8 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
               글쓰기
             </button>
           </div>
@@ -105,12 +105,13 @@ const CommunityPage = () => {
                 <button
                   key={post.id}
                   onClick={() => handlePostClick(post.id)}
-                  className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 px-2 py-12 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
+                  className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
                 >
-                  <h3 className="text-3xl font-bold self-center mt-0">{post.title}</h3>
-                  <div className="flex justify-around items-end w-full mt-36">
-                    <span className="text-lg pr-12">{post.writer}</span>
-                    <span className="text-lg ">👁 {post.visitcount}</span>
+                    <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
+                  <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
+                  <div className="flex justify-around items-end w-full mt-52">
+                  <div className="text-lg font-bold pr-32" >⌚&nbsp;{post.createDate}</div>
+                    <span className="font-bold text-lg ">👁&nbsp;{post.visitcount}</span>
                   </div>
                 </button>
               ))}
