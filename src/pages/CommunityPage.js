@@ -10,11 +10,17 @@ const CommunityPage = () => {
   const [searchType, setSearchType] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
 
+  const Authorization = localStorage.getItem('token');
+
   useEffect(() => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://10.125.121.216:8080/api/vitallog/community/board');
+        const response = await fetch('http://10.125.121.216:8080/api/vitallog/community/board', {
+          headers : {
+            "Authorization" : Authorization
+          }
+        });
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
@@ -65,7 +71,7 @@ const CommunityPage = () => {
             <VlogNav isUserPage={true} />
           </header>
           <div className="font-omyu_pretty flex w-full mt-20 justify-between">
-            <div>
+            <div className="w-[75%]">
               <form className="pl-48">
               <select
                 value={searchType}
@@ -81,7 +87,7 @@ const CommunityPage = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="검색어 입력"
-                className="text-2xl w-96 px-2 placeholder:text-center border-8 border-custom-blue py-3 rounded-lg"
+                className="text-2xl w-[50rem] px-2 placeholder:text-center border-8 border-custom-blue py-3 rounded-lg"
               />
               <button
 

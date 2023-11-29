@@ -11,7 +11,7 @@ const CommunityDetailPage = () => {
   const { postid } = useParams();
   
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  // const [newComment, setNewComment] = useState('');
 
   const createDate = new Date().toISOString();
   const Authorization = localStorage.getItem('token')
@@ -24,7 +24,11 @@ const CommunityDetailPage = () => {
     const fetchPost = async () => {
       if (!isCancelled) {
         try {
-          const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/detail/${postid}`);
+          const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/detail/${postid}`, {
+            headers : {
+              "Authorization" : Authorization
+            }
+          });
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
@@ -48,7 +52,11 @@ const CommunityDetailPage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`);
+        const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`,{
+          headers : {
+            "Authorization" : Authorization,
+          }
+        });
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setComments(data);
@@ -98,12 +106,12 @@ const CommunityDetailPage = () => {
           {post && (
             <div>
               <div className='flex justify-between'>
-                <div className='font-bold rounded-lg mb-10 bg-white border-4 w-24'>조회수 : {post.visitcount}</div>
-                <div className='w-28 pt-1 rounded-xl font-extrabold border-4 border-sky-200 bg-white mb-8' >작성자 : {post.writer}</div>
+                <div className='flex text-gray-700 items-center justify-center font-bold text-2xl mb-10 w-20'>👁 {post.visitcount}</div>
+                <div className='flex items-center justify-center w-36 pt-1 rounded-xl font-extrabold border-4 border-sky-200 bg-white mb-9' >📝 {post.writer}</div>
               </div>
               <h1 className="border-4 border-sky-200 bg-white rounded-xl text-4xl font-bold mb-12">{post.title}</h1>
               <div>
-                <div className="flex text-start border-4 border-sky-200 bg-white rounded-xl text-lg"><pre className='font-omyu_pretty' >{post.contents}</pre></div>
+                <div className="flex h-[20rem] p-2 text-start border-4 border-sky-200 bg-white rounded-xl text-lg"><pre className='font-omyu_pretty' >{post.contents}</pre></div>
                 <p className="font-bold text-2xl text-right mt-12">{new Date(post.createDate).toLocaleDateString()}</p>
               </div>
             </div>
