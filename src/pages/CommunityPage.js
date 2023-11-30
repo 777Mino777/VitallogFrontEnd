@@ -17,8 +17,8 @@ const CommunityPage = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch('http://10.125.121.216:8080/api/vitallog/community/board', {
-          headers : {
-            "Authorization" : Authorization
+          headers: {
+            "Authorization": Authorization
           }
         });
         if (!response.ok) {
@@ -57,22 +57,37 @@ const CommunityPage = () => {
       result = posts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase())
         || post.writer.toLowerCase().includes(searchTerm.toLowerCase()));
-      }
-      setFilteredPosts(result);
+    }
+    setFilteredPosts(result);
   };
-    // let varWrites = 1;
+  // let varWrites = 1;
 
+  const handleDelete = async (postid) => {
+    try {
+      const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/board/${postid}`, {
+        method: 'DELETE',
+        headers: {
+          "Authorization": Authorization,
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      setFilteredPosts(filteredPosts.filter(post => post.id !== postid));
+    } catch (error) {
+      console.error("Delete error:", error);
+    }
+  };
 
-
-    return (
-      <div className="max-w-[1820px] mx-auto">
-        <div className="flex flex-col min-h-screen bg-white text-gray-800">
-          <header className="p-6">
-            <VlogNav isUserPage={true} />
-          </header>
-          <div className="font-omyu_pretty flex w-full mt-20 justify-between">
-            <div className="w-[75%]">
-              <form className="pl-48">
+  return (
+    <div className="max-w-[1820px] mx-auto">
+      <div className="flex flex-col min-h-screen bg-white text-gray-800">
+        <header className="p-6">
+          <VlogNav isUserPage={true} />
+        </header>
+        <div className="font-omyu_pretty flex w-full mt-20 justify-between">
+          <div className="w-[75%]">
+            <form className="pl-48">
               <select
                 value={searchType}
                 onChange={(e) => setSearchType(e.target.value)}
@@ -100,38 +115,57 @@ const CommunityPage = () => {
                 검색
               </button>
             </form>
-            </div>
-            <button onClick={handleCommunityWrite} className="font-extrabold text-3xl mb-10 mr-40 py-3 px-16 rounded-xl border-8 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
-              글쓰기
-            </button>
           </div>
-          <main className="font-omyu_pretty flex-grow overflow-auto">
-            <div className="grid grid-cols-4 gap-4 ml-36 mx-12">
-              {filteredPosts.map((post, index) => (
-                <button
-                  key={post.id}
-                  onClick={() => handlePostClick(post.id)}
-                  className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
-                >
-                    <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
-                  <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
-                  <div className="flex justify-around items-end w-full mt-52">
+          <button onClick={handleCommunityWrite} className="font-extrabold text-3xl mb-10 mr-40 py-3 px-16 rounded-xl border-8 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
+            글쓰기
+          </button>
+        </div>
+        <main className="font-omyu_pretty flex-grow overflow-auto">
+          <div className="grid grid-cols-4 gap-4 ml-36 mx-12">
+            {filteredPosts.map((post, index) => (
+              <button
+                key={post.id}
+                onClick={() => handlePostClick(post.id)}
+                className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
+              >
+                <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
+                <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
+                <div className="flex justify-around items-end w-full mt-52">
                   <div className="text-lg font-bold pr-32" >⌚&nbsp;{post.createDate}</div>
-                    <span className="font-bold text-lg ">👁&nbsp;{post.visitcount}</span>
-                  </div>
-                </button>
-              ))}
-              {/* {Array.from({ length : varWrites }, (_, index) => (
+                  <span className="font-bold text-lg ">👁&nbsp;{post.visitcount}</span>
+                </div>
+              </button>
+            ))}
+
+            {/* {filteredPosts.map((post, index) => (
+              <div
+                key={post.id}
+                onClick={() => handlePostClick(post.id)}
+                className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
+              >
+                <div className="flex justify-around items-end w-full mt-52">
+                  <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
+                  {post.isOwnPost && (
+                    <button onClick={() => handleDelete(post.id)} className="text-red-500">X</button>
+                  )}
+                  <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
+                  <div className="text-lg font-bold pr-32" >⌚&nbsp;{post.createDate}</div>
+                  <span className="font-bold text-lg ">👁&nbsp;{post.visitcount}</span>
+                </div>
+              </div>
+            ))} */}
+
+            {/* {Array.from({ length : varWrites }, (_, index) => (
                       <div key={index} className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white w-80 px-20 py-36 border-custom-blue transition duration-300 hover:bg-sky-100">
                           <h3 className="text-lg font-semibold">글 제목 {varWrites - index}</h3>
                           <p>Post content placeholder</p>
                       </div>
                   )).reverse()} */}
-            </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
-    )
-  }
+    </div>
+  )
+}
 
-  export default CommunityPage;
+export default CommunityPage;
