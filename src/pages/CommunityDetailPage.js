@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import VlogNav from './VlogNav';
 import CommentWrite from '../components/CommentWrite';
 import CommentList from '../components/CommentList';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityDetailPage = () => {
   const [post, setPost] = useState(null);
@@ -16,6 +17,8 @@ const CommunityDetailPage = () => {
   const createDate = new Date().toISOString();
   const Authorization = localStorage.getItem('token')
   const userid = localStorage.getItem('id');
+
+  const navigate = useNavigate();
 
   let isCancelled = false;
   
@@ -104,6 +107,24 @@ const CommunityDetailPage = () => {
       if (!response.ok) throw new Error('Network response was not ok');
 
       setComments(comments.filter(comment => comment.id !== replyid));
+    }    
+    catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const deletePost = async () => {
+    try {
+      const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/board/${postid}`, {
+        method : 'DELETE',
+        headers : {
+          'Authorization' : Authorization,
+        },
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      navigate("/community")
+      alert("게시물이 삭제되었습니다.")
     } catch (error) {
       setError(error.message);
     }
@@ -130,6 +151,9 @@ const CommunityDetailPage = () => {
                 <div className="flex h-[20rem] p-2 text-start border-4 border-sky-200 bg-white rounded-xl text-lg"><pre className='font-omyu_pretty' >{post.contents}</pre></div>
                 <p className="font-bold text-2xl text-right mt-12">{new Date(post.createDate).toLocaleDateString()}</p>
               </div>
+              {post.writer === userid && (
+                <button onClick={deletePost} className="border-red-500 bg-red-500 border-4 text-white p-2 rounded transition duration-300 hover:bg-white hover:border-red-500 hover:text-red-500">게시물 삭제</button>
+              )}
             </div>
           )}
         </main>
