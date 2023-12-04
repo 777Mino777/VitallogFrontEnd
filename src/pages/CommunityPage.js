@@ -128,7 +128,10 @@ const CommunityPage = () => {
                 onClick={() => handlePostClick(post.id)}
                 className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
               >
+                <div>
                 <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
+                <button className="text-end font-bold text-red-500">X</button>
+                </div>
                 <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
                 <div className="flex justify-around items-end w-full mt-52">
                   <div className="text-lg font-bold pr-32" >⌚&nbsp;{post.createDate}</div>

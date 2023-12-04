@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import VlogNav from "./VlogNav";
 import RunningMan from "../components/RunningMan";
 import { useEffect, useState } from "react";
@@ -34,7 +34,7 @@ const UserPage = () => {
     //   console.log('User Id is undefined')
     // }
 
-  }, [])
+  }, [userid])
 
 
 

@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import VlogNav from "./VlogNav";
-import { useEffect } from "react";
 const MainPage = () => {
+
+    const isLoggedIn = () => {
+        return localStorage.getItem("token" != null);
+    }
 
     const navigate = useNavigate();
 
@@ -13,7 +16,10 @@ const MainPage = () => {
         <div className="max-w-[1820px] mx-auto">
             <div className="flex flex-col min-h-screen bg-white text-gray-800">
                 <header className="p-6">
-                    <VlogNav isUserPage={false} />
+                    {/* {isLoggedIn
+                        ? <VlogNav isUserPage={true} /> : */}
+                        <VlogNav isUserPage={false} />
+                    {/* } */}
                 </header>
                 <main className="flex-grow flex flex-col my-auto justify-center items-center text-center p-4 sm:p-20">
                     <h1 className="text-xl sm:text-8xl font-bold py-10 mr-10">
@@ -25,7 +31,7 @@ const MainPage = () => {
                         <p className="text-md sm:text-xl mb-3 sm:mb-3 font-bold">운동의 순간, 미래의 당신을 위한 건강일지입니다.</p>
                     </div>
                     <div className="mr-20 w-full flex justify-center items-center">
-                        <button onClick={GoToRegisterPage} className="bg-white text-md sm:text-xl hover:bg-gray-200 text-black border-4 border-custom-blue font-extrabold py-2 px-8 sm:px-10 rounded-3xl">
+                        <button onClick={GoToRegisterPage} className="bg-white text-md sm:text-xl hover:bg-sky-100 text-black border-4 border-custom-blue font-extrabold py-2 px-8 sm:px-10 rounded-3xl">
                             Sign up &gt;
                         </button>
                     </div>
