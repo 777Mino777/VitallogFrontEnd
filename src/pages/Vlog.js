@@ -11,6 +11,7 @@ import TodayLogPage from "./mypage/TodayLogPage";
 import PeriodPage from "./mypage/PeriodPage";
 import CommunityWritePage from "./CommunityWritePage"
 import CommunityDetailPage from "./CommunityDetailPage"
+import { RecoilRoot } from "recoil"
 const Vlog = () => {
 
   // const isLoggedIn = () => {
@@ -20,18 +21,14 @@ const Vlog = () => {
   return (
     <Router>
       <div>
-        {/* { isLoggedIn() ? ( */}
+        <RecoilRoot>
         <Routes>
-          {/* 로그인 상태에서 보여줄 페이지 */}
           <Route path="/user" element={<UserPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/write" element={<CommunityWritePage />} />
           <Route path="/community/detail/:postid" element={<CommunityDetailPage />} />
           <Route path="/information" element={<InformationPage />} />
-          {/* </Routes> */}
-          {/* ) : ( */}
-          {/* <Routes> */}
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -40,7 +37,7 @@ const Vlog = () => {
           <Route path="/today" element={<TodayLogPage />} />
           <Route path="/period" element={<PeriodPage />} />
         </Routes>
-        {/* ) } */}
+        </RecoilRoot>
       </div>
     </Router>
   );
