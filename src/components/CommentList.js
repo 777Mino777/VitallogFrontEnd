@@ -1,5 +1,6 @@
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, onDeleteComment, userId }) => {
+    console.log(comments)
     return (
         <div>
             <div className="text-center text-3xl font-omyu_pretty mt-4 mx-48 w-fit border-b-4 border-sky-200"> 댓글 {comments.length}개</div>
@@ -9,6 +10,9 @@ const CommentList = ({ comments }) => {
                         <div className="font-bold">{comment.writer}</div>
                         <div className="font-bold text-sky-200">&nbsp; | &nbsp;</div>
                         <div>{comment.contents}</div>
+                        {comment.writer === userId && (
+                            <button className="" onClick={() => onDeleteComment(comment.id)}>&nbsp;❌</button>
+                        )}
                     </div>
                 ))}
             </div>

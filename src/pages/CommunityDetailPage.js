@@ -93,6 +93,22 @@ const CommunityDetailPage = () => {
 
   };
 
+  const deleteComment = async (replyid) => {
+    try { 
+      const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments/${replyid}`, {
+        method : 'DELETE',
+        headers : {
+          'Authorization' : Authorization,
+        },
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      setComments(comments.filter(comment => comment.id !== replyid));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -120,7 +136,11 @@ const CommunityDetailPage = () => {
         {/* 댓글 입력 */}
         <CommentWrite postid={postid} onCommentSubmit={addComment} />
         {/* 댓글 목록 */}
-        <CommentList comments={comments}/>
+        <CommentList 
+          comments={comments}
+          onDeleteComment={deleteComment}
+          userId={userid}
+        />
       </div>
     </div>
   );
