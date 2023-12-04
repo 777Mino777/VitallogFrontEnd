@@ -3,9 +3,14 @@ import InputField from "../components/InputField";
 import { useState } from "react";
 import axios from "axios";
 import Modal from "../components/Modal";
+import { LoginStateAtom } from "../components/user/LoginStateAtom";
+import { useRecoilState } from "recoil";
+
 
 const LoginPage = () => {
   
+  const [isLoggedIn, setIsLoggedIn]  = useRecoilState(LoginStateAtom);
+
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +44,7 @@ const LoginPage = () => {
                   }
                       console.log("성공", response.status);
                       console.log(response.headers.get("Authorization"))
+                      setIsLoggedIn(true)
                       // response
                   })
                   .catch(function (error) {
