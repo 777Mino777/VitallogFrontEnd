@@ -29,14 +29,14 @@ const VlogNav = ({ isUserPage }) => {
                 isLoggedIn ?
                     <NavLink to="/community"
                         className={({ isActive }) => isActive
-                            ? "text-white bg-custom-gradient text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded ml-14"
+                            ? "text-black bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded ml-14"
                             : "text-black hover:bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded ml-14"}>
                         COMMUNITY
                     </NavLink>
                     :
                     <NavLink to="/login"
                         className={({ isActive }) => isActive
-                            ? "text-white bg-custom-gradient text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded ml-14"
+                            ? "text-black bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded ml-14"
                             : "text-black hover:bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded ml-14"}>
                         COMMUNITY
                     </NavLink>
@@ -46,14 +46,14 @@ const VlogNav = ({ isUserPage }) => {
                 isLoggedIn ?
                     <NavLink to="/mypage"
                         className={({ isActive }) => isActive
-                            ? "text-white bg-custom-gradient text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"
+                            ? "text-black bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"
                             : "text-black hover:bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"}>
                         MY PAGE
                     </NavLink>
                     :
                     <NavLink to="/login"
                         className={({ isActive }) => isActive
-                            ? "text-white bg-custom-gradient text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"
+                            ? "text-black bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"
                             : "text-black hover:bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"}>
                         MY PAGE
                     </NavLink>
@@ -71,7 +71,7 @@ const VlogNav = ({ isUserPage }) => {
             }
 
             <NavLink to="/information"
-                className={({ isActive }) => isActive ? "text-white bg-custom-gradient text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"
+                className={({ isActive }) => isActive ? "text-black bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"
                     : "text-black hover:bg-gray-100 text-md sm:text-2xl font-bold py-1 sm:py-2 px-2 rounded"}>
                 INFORMATION
             </NavLink>

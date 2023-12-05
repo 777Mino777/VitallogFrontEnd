@@ -15,7 +15,8 @@ module.exports = {
       }),
 
       fontFamily : {
-        'omyu_pretty' : ['omyu_pretty', 'sans-serif'],
+        'omyu_pretty' : ['omyu_pretty' ,'sans-serif'],
+        'yg-jalnan' : ['yg-jalnan', 'sans-serif']
       }
     },
   },

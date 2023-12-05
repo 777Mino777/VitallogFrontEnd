@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import VlogNav from "./VlogNav";
-import RunningMan from "../components/RunningMan";
 import { useEffect, useState } from "react";
 const UserPage = () => {
 
@@ -48,52 +47,61 @@ const UserPage = () => {
 
   return (
     <div className="max-w-[1820px] mx-auto">
-      <div className="flex flex-col min-h-screen bg-white text-gray-800">
+      <div className="flex flex-col min-h-screen text-gray-800">
         <header className="p-2 sm:p-6">
-          <VlogNav isUserPage={true} />
+          <VlogNav />
         </header>
-        <main className="flex my-0.5 py-14">
-          <div className="mx-10 bg-custom-gradient border-4 mb-1 border-black bg-white rounded-xl shadow-md relative sm:w-1/4 md:w-2/3 lg:w-1/2 xl:w-2/3 3xl:w-1/5">
-            <div className="flex">
-              <button className=" bg-white m-24 p-1 border-4  border-black rounded-[50%] w-53 h-48">
-                <RunningMan />
-              </button>
-              <div className=" mx-0 text-5xl my-40 font-bold text-white">
-                {username}님
-                <br />
-                어서오세요
+        <main className="grow flex justify-center items-center">
+          <div className=" h-[680px] grid grid-cols-1 lg:grid-cols-2 gap-5 mx-20 px-20 items-center">
+            <div className="order-2 lg:order-1 flex flex-col justify-between bg-[url('./images/main.jpg')] bg-cover h-full p-10 mr-10 rounded-xl shadow-md">
+              <div className="items-center">
+                <div className="font-yg-jalnan text-2xl font-bold text-[#666666] mt-4">
+                  {username}님
+                  <span className="text-lg"> 어서오세요</span>
+                </div>
+                <div className="text-[#919191] font-omyu_pretty text-lg">
+                건강과 운동을 기록하며 함께 성장하는 Vital Log 입니다.
+                </div>
+              </div>
+
+              <div>
+                <div className="font-bold text-2xl mb-5 text-[#e2e0e0] ">Log</div>
+
+                <div id="exercisedata" className="flex-col ">
+                  {filledExerciseRecords.map((record, index) => (
+                    <div key={index} className="grid grid-cols-4 py-2 px-8 mb-5 rounded-xl text-center items-center justify-between bg-white text-lg font-bold bg-opacity-70 ">
+                      <div>{record.exerDate ? `${record.exerDate}` : '🏃‍♂️'}</div>
+                      {
+                        record.exercise
+                          ?
+                          <>
+                            <div className="truncate">{record.exercise}</div>
+                            <div>{record.exerTime}분</div>
+                          </>
+                          :
+                          <div className="col-span-2">운동기록을 채워봐요!</div>
+                      }
+                      <div>{record.kcal ? `${record.kcal}kcal` : '🏃‍♀️'}</div>
+                    </div>
+                  ))
+                  }
+                </div>
               </div>
             </div>
-            <div className="p-0.5 mx-28 font-bold text-3xl">Log
-            </div>
-
-            <div id="exercisedata" className="flex-col space-y-12 py-12 px-12">
-              {filledExerciseRecords.map((record, index) => (
-                <div key={index} className="flex items-center space-x-16 bg-white sm:text-xl hover:bg-sky-100 text-black border-4 border-black font-bold py-2 px-8 sm:px-10 rounded-xl">
-                  {/* 이 밑의 div 4개 */}
-                  <div className="mx-2 flex">{record.exerDate ? `${record.exerDate}` : '🏃‍♂️\u00A0'}</div>
-                  <div className="flex-1">{record.exercise ? `${record.exercise}` : '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 운동기록을 채워봐요! \u00A0\u00A0\u00A0\u00A0'}</div>
-                  <div className="flex">{record.exerTime ? `${record.exerTime}분` : ' '}</div>
-                  <div className="flex">{record.kcal ? `${record.kcal}kcal` : '\u00A0🏃‍♀️'}</div>
-                </div>
-              ))
-              }
-            </div>
-
-          </div>
-          <div className="flex-grow flex flex-col mx-auto justify-center items-center text-center p-4 sm:p-20">
-            <h1 className="text-xl sm:text-8xl font-bold">
-              <span className="text-black">Your Health, Your </span>
-              <span className="text-custom-blue">VitalLog</span>
-            </h1>
-            <div className="py-10">
-              <p className="text-md sm:text-xl my-3 sm:my-1 font-bold">강한 몸을 만들고, 다른 나를 나아가는 여정을 기록하세요.</p>
-              <p className="text-md sm:text-xl mb-3 sm:mb-3 font-bold">운동의 순간, 미래의 당신을 위한 건강일지입니다.</p>
-            </div>
-            <div className="w-full flex justify-center items-center">
-              <button onClick={GoToMyPage} className="bg-white text-md sm:text-xl hover:bg-sky-100 text-black border-4 border-custom-blue font-extrabold py-2 px-8 sm:px-10 rounded-3xl">
-                My Page &gt;
-              </button>
+            <div className="order-1 flex-grow flex flex-col justify-center items-center text-center sm:p-20">
+              <h1 className="text-xl sm:text-7xl font-extrabold">
+                <div className="mb-4">Your Health,</div>
+                <div className="">Your <span className="text-custom-blue">VitalLog</span></div>
+              </h1>
+              <div className="py-10">
+                <p className="text-md sm:text-lg my-3 sm:my-1 font-bold">강한 몸을 만들고, 다른 나로 나아가는 여정을 기록하세요.</p>
+                <p className="text-md sm:text-lg mb-3 sm:mb-3 font-bold">운동의 순간, 미래의 당신을 위한 건강일지입니다.</p>
+              </div>
+              <div className="w-full flex justify-center items-center">
+                <button onClick={GoToMyPage} className="bg-white text-md text-black border-2 border-custom-blue font-extrabold py-2 px-8 sm:px-10 rounded-3xl hover:bg-custom-blue hover:text-white">
+                  My Page &gt;
+                </button>
+              </div>
             </div>
           </div>
         </main>
