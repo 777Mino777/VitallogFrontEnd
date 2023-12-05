@@ -50,7 +50,7 @@ const SideBar = ({ page }) => {
     setMenuitems(menuItem);
 
 
-    fetch(`http://10.125.121.216:8080/api/vitallog/mypage/user1?date=${getDate()}`, {
+    fetch(`http://10.125.121.216:8080/api/vitallog/mypage/${localStorage.getItem("id")}?date=${getDate()}`, {
       method: "GET",
       headers: {
         "Content-Type": 'application/json',
