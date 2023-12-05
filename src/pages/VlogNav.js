@@ -15,11 +15,13 @@ const VlogNav = ({ isUserPage }) => {
     const handleLogout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("id")
+        localStorage.removeItem("name")
+
         setIsLoggedIn(false);
         navigate("/");
     }
 
-    const handleLoginButton = isUserPage ? handleLogout : handleLogin
+    const handleLoginButton = isLoggedIn ? handleLogout : handleLogin
 
     return (
         <nav className="flex items-center gap-44">
