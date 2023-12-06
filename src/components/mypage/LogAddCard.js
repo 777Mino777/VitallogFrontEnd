@@ -10,7 +10,7 @@ const LogAddCard = () => {
     return (
         <div className="items-center flex flex-col">
             <div onClick={linkAddLog}
-                className="w-[280px] h-[300px] bg-[#f7faff] transition-all hover:bg-[#0085C9] hover:text-white border rounded-lg flex flex-col justify-center items-center p-5 pt-8">
+                className="w-[240px] h-[260px] bg-[#f7faff] transition-all hover:bg-[#0085C9] hover:text-white border rounded-lg flex flex-col justify-center items-center p-5 pt-8">
                 <FaWaveSquare className="text-2xl" />
 
                 <div className="px-6 py-4">

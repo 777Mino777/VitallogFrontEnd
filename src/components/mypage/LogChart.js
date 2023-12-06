@@ -71,7 +71,7 @@ const LogChart = ({caption, logData }) => {
       : null;
 
     return (
-        <div className="w-[1200px]">
+        <div className="w-[1020px]">
             {logData && logChart}
         </div>
     )

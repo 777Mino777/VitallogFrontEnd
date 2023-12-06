@@ -36,17 +36,17 @@ const TotalPage = () => {
       <header className="p-2 sm:p-6">
         <VlogNav isUserPage={true} />
       </header>
-      <div className="grow  overflow-hidden	flex py-8 mb-4 px-20 bg-white text-gray-800">
+      <div className="grow  overflow-hidden	flex py-8 mb-4 px-20 mx-20 bg-white text-gray-800">
         <SideBar page={"total"} />
         <main className="mx-10 p-10 border-2 w-full  rounded-lg shadow">
           <div className="h-full overflow-auto">
             <div className="text-2xl font-bold">전체 로그보기</div>
             <div className="flex justify-center  items-center">
-              <div className="w-[1200px]">
+              <div className="w-[1020px]">
                 <LogChart caption="Total Log" logData={dailyTotalLog}/>
               </div>
             </div>
-            <div className="p-20">
+            <div className="px-10 py-20">
               <LogTable userlog={userlog}/>
             </div>
             

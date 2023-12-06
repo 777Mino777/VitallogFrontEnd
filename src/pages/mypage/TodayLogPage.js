@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SideBar from "../../components/mypage/SideBar";
 import VlogNav from "../VlogNav";
 import SearchableSelect from "../../components/mypage/SearchableSelect";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 
 const TodayLogPage = () => {
-  const navigate = useNavigate();
 
   const [exerid, setExerid] = useState();
   const [met, setMet] = useState();
@@ -71,7 +69,7 @@ const TodayLogPage = () => {
       <header className="p-2 sm:p-6">
         <VlogNav isUserPage={true} />
       </header>
-      <div className="grow flex py-8 mb-4 px-20 bg-white text-gray-800">
+      <div className="grow flex py-8 mb-4 px-20 mx-20 bg-white text-gray-800">
         <SideBar page={"today"} />
         <main className="mx-10 p-10 border-2	w-full rounded-lg shadow">
           <div className="h-full">
