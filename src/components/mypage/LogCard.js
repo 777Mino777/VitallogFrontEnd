@@ -1,4 +1,3 @@
-import axios from "axios";
 import { BiDumbbell } from "react-icons/bi";
 import { FiMinusCircle } from "react-icons/fi";
 
@@ -21,7 +20,7 @@ const LogCard = ({ exer, time, kcal, seq }) => {
     }
     return (
         <div className="items-center flex flex-col">
-            <div className="w-[280px] h-[300px] border shadow-md rounded-lg flex flex-col p-5 ">
+            <div className="w-[240px] h-[260px] border shadow-md rounded-lg flex flex-col p-5 ">
                 <div className="w-full flex justify-end">
                     <button onClick={deleteLog} className="text-[#e0e0e0] hover:text-[#D4573A]">
                         <FiMinusCircle />
@@ -32,7 +31,12 @@ const LogCard = ({ exer, time, kcal, seq }) => {
                         <BiDumbbell />
                     </div>
                     <div className="px-6 py-4">
-                        <div className="font-bold text-xl mb-2 text-center">{exer}</div>
+                        {
+                            exer.length > 8 ?
+                            <div className="font-bold text-lg mb-2 text-center">{exer}</div>
+                            :
+                            <div className="font-bold text-xl mb-2 text-center">{exer}</div>
+                        }
                         <p className="font-semibold text-lg mb-2 text-gray-700 text-center">
                             {exertime}
                         </p>

@@ -28,7 +28,7 @@ const LogCardList = ({ data }) => {
     };
 
     return (
-        <div className='lg:w-[1200px]  overflow-auto items-center flex '>
+        <div className='lg:w-[1020px]  overflow-auto items-center flex '>
             <AliceCarousel
                 mouseTracking
                 items={createItems()}

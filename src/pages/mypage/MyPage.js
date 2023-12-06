@@ -5,8 +5,8 @@ import LogCardList from "../../components/mypage/LogCardList";
 
 const MyPage = () => {
   const [userlog, setUserlog] = useState();
-  
   useEffect(()=>{
+    
     const userid = localStorage.getItem("id");
     const url = `http://10.125.121.216:8080/api/vitallog/mypage/${userid}/today?date=${getDate()}`
     const token = localStorage.getItem("token")
@@ -37,7 +37,7 @@ const MyPage = () => {
       <header className="p-2 sm:p-6">
         <VlogNav isUserPage={true} />
       </header>
-      <div className="grow flex py-8 mb-4 px-20 bg-white text-gray-800">
+      <div className="grow flex py-8 mb-4 px-20 mx-20 bg-white text-gray-800">
         <SideBar page={"mypage"} />
         <main className="mx-10 p-10 border-2	w-full rounded-lg shadow">
           <div className="h-full">
