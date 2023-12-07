@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import VlogNav from "./VlogNav"
 import { useEffect, useState } from "react";
-
+import dailyImage from '../images/daily.png'
+import proudImage from '../images/proud.png'
+import questionImage from '../images/question.jpg'
+import recruitImage from '../images/recruit.jpg'
+import tipImage from '../images/tip.jpg'
 const CommunityPage = () => {
 
   const navigate = useNavigate();
@@ -11,6 +15,30 @@ const CommunityPage = () => {
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   const Authorization = localStorage.getItem('token');
+
+  const categoryImages = {
+    daily: dailyImage,
+    proud: proudImage,
+    question: questionImage,
+    recruit: recruitImage,
+    tip: tipImage,
+  }
+
+  const categoryNames = {
+    daily: "일상",
+    proud: "자랑",
+    question: "질문",
+    recruit: "모집",
+    tip: "꿀팁",
+  }
+
+  const categoryColors = {
+    daily: "text-cyan-500",
+    proud: "text-sky-700",
+    question: "text-red-300",
+    recruit: "text-teal-500",
+    tip: "text-amber-400",
+  }
 
   useEffect(() => {
 
@@ -85,13 +113,18 @@ const CommunityPage = () => {
         <header className="p-6">
           <VlogNav isUserPage={true} />
         </header>
-        <div className="font-omyu_pretty flex w-full mt-20 justify-between">
-          <div className="w-[75%]">
-            <form className="pl-48">
+        <div className="flex w-full mt-24 justify-between">
+          <div className="">
+            <div className="flex justify-end w-full">
+              <button onClick={handleCommunityWrite} className="font-extrabold text-xl mb-5 py-2 px-8 rounded-xl border-2 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
+                글쓰기
+              </button>
+            </div>
+            <form className="pl-60">
               <select
                 value={searchType}
                 onChange={(e) => setSearchType(e.target.value)}
-                className="text-center px-4 mr-2 rounded-lg py-4 text-2xl border-8 border-custom-blue"
+                className="text-center px-2 ml-12 rounded-lg py-3 text-base border-2 border-[#D9D9D9]"
               >
                 <option value="all">제목+작성자</option>
                 <option value="title">제목</option>
@@ -102,7 +135,7 @@ const CommunityPage = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="검색어 입력"
-                className="text-2xl w-[50rem] px-2 placeholder:text-center border-8 border-custom-blue py-3 rounded-lg"
+                className="text-base w-[56rem] ml-5 px-2 placeholder:text-center border-2 border-[#D9D9D9] pl-1 py-3 rounded-lg"
               />
               <button
 
@@ -110,60 +143,45 @@ const CommunityPage = () => {
                   e.preventDefault();
                   handleSearch();
                 }}
-                className="font-bold text-2xl rounded-lg ml-2 px-16 py-3 border-8 border-custom-blue bg-custom-blue text-white transition duration-200 hover:border-sky-400 hover:bg-sky-400"
+                className="font-bold text-base rounded-lg ml-3 px-16 py-3 border-2 border-[#c2c0c0] bg-[#c2c0c0] text-white transition duration-200 hover:border-gray-500 hover:bg-gray-400 hover:text-gray-100"
               >
                 검색
               </button>
             </form>
           </div>
-          <button onClick={handleCommunityWrite} className="font-extrabold text-3xl mb-10 mr-40 py-3 px-16 rounded-xl border-8 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
-            글쓰기
-          </button>
+
         </div>
-        <main className="font-omyu_pretty flex-grow overflow-auto">
-          <div className="grid grid-cols-4 gap-4 ml-36 mx-12">
-            {filteredPosts.map((post, index) => (
+        <main className=" flex-grow overflow-auto mt-10">
+          <div className="grid grid-cols-4 gap-4 px-72">
+            {filteredPosts.map((post) => (
               <button
                 key={post.id}
                 onClick={() => handlePostClick(post.id)}
-                className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
+                className={`overflow-hidden shadow-lg shadow-gray-400 border-1 rounded-xl bg-white mb-4 w-72 border-gray-300 transition duration-300 hover:scale-95 flex flex-col justify-between}`}
               >
-              
-                <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
-                
-                
-                <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
-                <div className="flex justify-around items-end w-full mt-52">
-                  <div className="text-lg font-bold pr-32" >⌚&nbsp;{post.createDate}</div>
-                  <span className="font-bold text-lg ">👁&nbsp;{post.visitcount}</span>
+                <div key={post.id} className="h-32 w-full">
+                  <img className="w-full h-full object-cover" src={categoryImages[post.category]} alt={`${post.category}`} />
+                </div>
+
+                <div className="w-full h-2 mt-5 mx-2  flex justify-stretch">
+                  <h3 className={`w-[3rem] text-lg font-bold self-center ${categoryColors[post.category]}`}>{categoryNames[post.category]}</h3>
+                  <h3 className="w-[13rem] text-lg font-extrabold self-center text-start truncate">&nbsp;{post.title}</h3>
+                </div>
+                <div className="h-20 mb-10 ">
+                  <p className="w-60 inline-block text-md ml-4 mt-5 mb-10 text-gray-400 truncate text-start">{post.contents}</p>
+                </div>
+                <div className="flex justify-around px-4 py-5">
+                  <div className="flex items-end pr-24">
+                    <span className="font-omyu_pretty text-xs pr-3" >&nbsp;{post.createDate}</span>
+                    <span className="font-omyu_pretty text-xs pr-4 ">👁&nbsp;{post.visitcount}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="rounded-lg border-black font-bold text-xs">📝{post.writer}</span>
+                  </div>
                 </div>
               </button>
             ))}
-
-            {/* {filteredPosts.map((post, index) => (
-              <div
-                key={post.id}
-                onClick={() => handlePostClick(post.id)}
-                className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white mb-4 w-80 border-custom-blue transition duration-300 hover:border-sky-800 hover:bg-custom-gradient flex flex-col justify-between"
-              >
-                <div className="flex justify-around items-end w-full mt-52">
-                  <span className="px-1 rounded-lg border-e-4 border-b-4 border-black font-bold text-lg">📝{post.writer}</span>
-                  {post.isOwnPost && (
-                    <button onClick={() => handleDelete(post.id)} className="text-red-500">X</button>
-                  )}
-                  <h3 className="text-3xl mt-10 font-bold self-center truncate w-52">{post.title}</h3>
-                  <div className="text-lg font-bold pr-32" >⌚&nbsp;{post.createDate}</div>
-                  <span className="font-bold text-lg ">👁&nbsp;{post.visitcount}</span>
-                </div>
-              </div>
-            ))} */}
-
-            {/* {Array.from({ length : varWrites }, (_, index) => (
-                      <div key={index} className="shadow-xl shadow-sky-300 border-8 rounded-2xl bg-white w-80 px-20 py-36 border-custom-blue transition duration-300 hover:bg-sky-100">
-                          <h3 className="text-lg font-semibold">글 제목 {varWrites - index}</h3>
-                          <p>Post content placeholder</p>
-                      </div>
-                  )).reverse()} */}
+            {/*  */}
           </div>
         </main>
       </div>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const CommentWrite = ({ postid, onCommentSubmit }) => {
+const CommentWrite = ({ onCommentSubmit }) => {
 
     const [newComment, setNewComment] = useState('');
 
@@ -19,9 +19,9 @@ const CommentWrite = ({ postid, onCommentSubmit }) => {
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder="댓글을 입력하세요"
-                    className="ml-48 mt-4 text-xl placeholder-center rounded-lg border-4 border-custom-blue w-full"
+                    className="ml-80 mt-4 text-xl placeholder-center rounded-lg border-4 border-custom-blue w-full"
                 />
-                <button type='submit' className='mr-48 mx-6 w-96 text-2xl mt-4 py-4 rounded-lg border-4 border-custom-blue bg-custom-blue text-white transition duration-300 hover:border-custom-blue hover:bg-white hover:text-custom-blue'>
+                <button type='submit' className='mr-80 mx-6 w-96 text-2xl mt-4 py-4 rounded-lg border-4 border-custom-blue bg-custom-blue text-white transition duration-300 hover:border-custom-blue hover:bg-white hover:text-custom-blue'>
                     등록
                 </button>
             </form>

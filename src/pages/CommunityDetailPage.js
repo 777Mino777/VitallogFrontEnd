@@ -10,7 +10,7 @@ const CommunityDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { postid } = useParams();
-  
+
   const [comments, setComments] = useState([]);
   // const [newComment, setNewComment] = useState('');
 
@@ -21,15 +21,15 @@ const CommunityDetailPage = () => {
   const navigate = useNavigate();
 
   let isCancelled = false;
-  
+
   useEffect(() => {
 
     const fetchPost = async () => {
       if (!isCancelled) {
         try {
           const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/detail/${postid}`, {
-            headers : {
-              "Authorization" : Authorization
+            headers: {
+              "Authorization": Authorization
             }
           });
           if (!response.ok) {
@@ -55,15 +55,15 @@ const CommunityDetailPage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`,{
-          headers : {
-            "Authorization" : Authorization,
+        const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`, {
+          headers: {
+            "Authorization": Authorization,
           }
         });
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setComments(data);
-        console.log("comments",data)
+        console.log("comments", data)
       } catch (error) {
         setError(error.message);
       }
@@ -75,20 +75,20 @@ const CommunityDetailPage = () => {
   const addComment = async (commentContent) => {
     try {
       const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments`, {
-        method : 'POST',
-        headers : {
-          'Content-Type' : 'application/json',
-          'Authorization' : Authorization,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': Authorization,
         },
-        body : JSON.stringify({ 
-          "writer" : userid,
-          "contents" : commentContent,
-          "createDate" : createDate, 
+        body: JSON.stringify({
+          "writer": userid,
+          "contents": commentContent,
+          "createDate": createDate,
         }),
       });
       if (!response.ok) throw new Error('Network response was not ok');
       const newCommentData = await response.json();
-      console.log("resp",newCommentData)
+      console.log("resp", newCommentData)
       setComments(newCommentData);
     } catch (error) {
       setError(error.message);
@@ -97,17 +97,17 @@ const CommunityDetailPage = () => {
   };
 
   const deleteComment = async (replyid) => {
-    try { 
+    try {
       const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${postid}/comments/${replyid}`, {
-        method : 'DELETE',
-        headers : {
-          'Authorization' : Authorization,
+        method: 'DELETE',
+        headers: {
+          'Authorization': Authorization,
         },
       });
       if (!response.ok) throw new Error('Network response was not ok');
 
       setComments(comments.filter(comment => comment.id !== replyid));
-    }    
+    }
     catch (error) {
       setError(error.message);
     }
@@ -116,15 +116,32 @@ const CommunityDetailPage = () => {
   const deletePost = async () => {
     try {
       const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/board/${postid}`, {
-        method : 'DELETE',
-        headers : {
-          'Authorization' : Authorization,
+        method: 'DELETE',
+        headers: {
+          'Authorization': Authorization,
         },
       });
       if (!response.ok) throw new Error('Network response was not ok');
 
       navigate("/community")
       alert("게시물이 삭제되었습니다.")
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const editComment = async (commentId, updatedContent) => {
+    try {
+      const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${userid}/comments/${commentId}?contents=${encodeURIComponent(updatedContent)}`, {
+        method : 'PUT',
+        headers : {
+          'Authorization' : Authorization,
+        },
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      setComments(comments.map(comment =>
+        comment.id === commentId ? { ...comment, contents : updatedContent } : comment));
     } catch (error) {
       setError(error.message);
     }
@@ -139,20 +156,24 @@ const CommunityDetailPage = () => {
         <header className="p-6">
           <VlogNav isUserPage={true} />
         </header>
-        <main className="font-omyu_pretty shadow-lg shadow-sky-400 rounded-2xl mx-36 mt-20 bg-custom-gradient border-4 border-sky-150 justify-center items-center text-center p-10">
+        <main className="font-omyu_pretty rounded-2xl mx-80 mt-20 bg-white border-4 border-sky-150 justify-center items-center text-center">
           {post && (
             <div>
-              <div className='flex justify-between'>
-                <div className='flex text-gray-700 items-center justify-center font-bold text-2xl mb-10 w-20'>👁 {post.visitcount}</div>
-                <div className='flex items-center justify-center w-36 pt-1 rounded-xl font-extrabold border-4 border-sky-200 bg-white mb-9' >📝 {post.writer}</div>
+              <h1 className="border-b-4 w-[100%] text-white border-custom-blue bg-custom-blue py-2 rounded-t-lg text-3xl font-bold">{post.title}</h1>
+              <div className='flex justify-between border-b-4'>
+                <div className='flex items-center justify-center w-24 rounded-xl font-extrabold bg-white' >작성자 : {post.writer}</div>
+                <div className='flex text-gray-700 items-center justify-center font-bold text-2xl mb-10 w-24'>조회수 : {post.visitcount}</div>
               </div>
-              <h1 className="border-4 border-sky-200 bg-white rounded-xl text-4xl font-bold mb-12">{post.title}</h1>
-              <div>
-                <div className="flex h-[20rem] p-2 text-start border-4 border-sky-200 bg-white rounded-xl text-lg"><pre className='font-omyu_pretty' >{post.contents}</pre></div>
+              <div className=''>
+                <div className="overflow-auto break-all	 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-lg">{post.contents}</div>
                 <p className="font-bold text-2xl text-right mt-12">{new Date(post.createDate).toLocaleDateString()}</p>
               </div>
               {post.writer === userid && (
-                <button onClick={deletePost} className="border-red-500 bg-red-500 border-4 text-white p-2 rounded transition duration-300 hover:bg-white hover:border-red-500 hover:text-red-500">게시물 삭제</button>
+                <button onClick={() => navigate(`/community/edit/${postid}`, { state: { post } })}
+                  className="border-green-500 bg-white border-4 text-green-700 mx-2 p-2 rounded transition duration-300 hover:bg-white hover:border-green-500 hover:text-green-500" >게시물 수정</button>
+              )}
+              {post.writer === userid && (
+                <button onClick={deletePost} className="border-red-500 bg-white border-4 text-red-700 p-2 rounded transition duration-300 hover:bg-white hover:border-red-500 hover:text-red-500">게시물 삭제</button>
               )}
             </div>
           )}
@@ -160,9 +181,10 @@ const CommunityDetailPage = () => {
         {/* 댓글 입력 */}
         <CommentWrite postid={postid} onCommentSubmit={addComment} />
         {/* 댓글 목록 */}
-        <CommentList 
+        <CommentList
           comments={comments}
           onDeleteComment={deleteComment}
+          onEditComment={editComment}
           userId={userid}
         />
       </div>
