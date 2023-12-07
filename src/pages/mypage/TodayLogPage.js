@@ -92,15 +92,15 @@ const TodayLogPage = () => {
                     className="border border-[#000] h-10 rounded-full text-center w-full" />
                 </div>
                 <div className="col-span-2">
-                  <button className="bg-[#EBEBEB] p-2 px-5 rounded-full font-bold" onClick={() => calcEnergy()}>에너지소비량 계산하기</button>
-
-                </div>
-                <div className="col-span-2">
                   <div className="flex justify-center text-lg font-bold mb-3">소모칼로리</div>
                   <div className="font-semibold"><span className="text-2xl text-[#D3545C]">{kcal}</span> kcal</div>
                 </div>
-                <div className="col-span-2">
-                  <button className="w-full bg-custom-blue h-10 rounded-full font-bold text-white" onClick={() => addDailyLog()}>
+                <div className="px-5">
+                  <button className="transition shadow-md w-full text-white bg-custom-blue hover:bg-[#002960] p-2 px-5 rounded-full font-bold" onClick={() => calcEnergy()}>에너지소비량 계산하기</button>
+
+                </div>
+                <div className="px-5">
+                  <button className="transition shadow-md w-full bg-custom-blue hover:bg-[#002960] h-10 rounded-full font-bold text-white" onClick={() => addDailyLog()}>
                     데일리로그 추가하기
                   </button>
                 </div>
