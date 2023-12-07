@@ -12,6 +12,7 @@ import PeriodPage from "./mypage/PeriodPage";
 import CommunityWritePage from "./CommunityWritePage"
 import CommunityDetailPage from "./CommunityDetailPage"
 import { RecoilRoot } from "recoil"
+import CommunityUpdatePage from "./CommunityUpdatePage"
 const Vlog = () => {
 
   // const isLoggedIn = () => {
@@ -27,6 +28,7 @@ const Vlog = () => {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/write" element={<CommunityWritePage />} />
+          <Route path="/community/edit/:postid" element={<CommunityUpdatePage />} />
           <Route path="/community/detail/:postid" element={<CommunityDetailPage />} />
           <Route path="/information" element={<InformationPage />} />
           <Route path="/" element={<MainPage />} />
