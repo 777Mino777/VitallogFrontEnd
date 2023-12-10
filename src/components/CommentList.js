@@ -29,7 +29,7 @@ const CommentList = ({ comments, onDeleteComment, onEditComment, userId }) => {
                                     onChange={(e) => setEditText(e.target.value)}
                                     className="flex-1"
                                 />
-                                <button onClick={handleSave} className="ml-2">💾</button>
+                                <button onClick={handleSave} className="font-omyu_pretty underline mr-2">저장</button>
                             </>
                         ) : (
                             <>

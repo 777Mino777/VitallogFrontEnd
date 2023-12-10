@@ -109,7 +109,7 @@ const CommunityPage = () => {
   };
 
   return (
-    <div className="max-w-[1820px] mx-auto">
+    <div className="page-hi max-w-[1820px] mx-auto">
       <div className="flex flex-col min-h-screen bg-white text-gray-800">
         <header className="p-6">
           <VlogNav isUserPage={true} />
@@ -127,7 +127,7 @@ const CommunityPage = () => {
                 onChange={(e) => setSearchType(e.target.value)}
                 className="text-center px-2 ml-12 rounded-lg py-3 text-base border-2 border-[#D9D9D9]"
               >
-                <option value="all">제목+작성자</option>
+                <option value="all">전체</option>
                 <option value="title">제목</option>
                 <option value="writer">작성자</option>
               </select>
@@ -136,7 +136,7 @@ const CommunityPage = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="검색어 입력"
-                className="text-base w-[56rem] ml-5 px-2 placeholder:text-center border-2 border-[#D9D9D9] pl-1 py-3 rounded-lg"
+                className="text-base w-[59rem] ml-5 px-2 placeholder:text-center border-2 border-[#D9D9D9] pl-1 py-3 rounded-lg"
               />
               <button
 
@@ -144,7 +144,7 @@ const CommunityPage = () => {
                   e.preventDefault();
                   handleSearch();
                 }}
-                className="font-bold text-base rounded-lg ml-3 px-16 py-3 border-2 border-[#c2c0c0] bg-[#c2c0c0] text-white transition duration-200 hover:border-gray-500 hover:bg-gray-400 hover:text-gray-100"
+                className="font-bold text-base rounded-lg ml-3 px-16 py-3 border-2 border-[#c2c0c0] bg-[#c2c0c0] text-white transition duration-200 hover:border-gray-400 hover:bg-gray-400"
               >
                 검색
               </button>

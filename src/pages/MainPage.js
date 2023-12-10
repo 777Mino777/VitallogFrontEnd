@@ -18,7 +18,7 @@ const MainPage = () => {
                 <header className="p-6">
                     <VlogNav />
                 </header>
-                <main className="grow flex flex-col my-auto justify-center items-center text-center mr-10">
+                <main className="page-hi grow flex flex-col my-auto justify-center items-center text-center mr-10">
                     <h1 className="text-xl sm:text-7xl font-bold mb-16">
                         <div>Your Health, Your <span className="animate-pulse text-custom-blue">VitalLog</span></div>
                     </h1>

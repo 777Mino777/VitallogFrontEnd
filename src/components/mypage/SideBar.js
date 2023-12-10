@@ -76,7 +76,7 @@ const SideBar = ({ page }) => {
   }, []);
   return (
     <aside className="p-5 w-[360px] flex flex-col gap-3 border-2 shadow-md bg-[#EBEBEB] rounded-lg  items-center">
-      <div className="mt-7 border-2 rounded-full p-2 border-black bg-white">
+      <div className="animate-[spin_0.9s] mt-7 border-2 rounded-full p-2 border-black bg-white">
         <RunningMan2 width={100} height={100} />
       </div>
       <div className="font-yg-jalnan mt-2 text-xl text-[#575757] text-center font-semibold">

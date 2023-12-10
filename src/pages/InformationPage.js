@@ -56,13 +56,13 @@ const InformationPage = () => {
 
   console.log(userInfo)
   return (
-    <div className="max-w-[1820px] mx-auto">
+    <div className="page-hi max-w-[1820px] mx-auto">
       <div className="flex flex-col min-h-screen bg-white text-gray-800">
         <header className="p-2 sm:p-6">
           <VlogNav />
         </header>
-        <div className='px-20 mx-20 mt-10'>
-          <div className='mx-20 text-2xl font-bold'>추천 운동 목록 보기</div>
+        <div className='border-t-2 border-b-2 border-custom-blue px-20 mx-20 mt-10'>
+          <div className='mt-4 mx-20 text-2xl font-bold'>추천 운동 목록 보기</div>
           <div className="flex justify-center gap-5 mb-5">
             <select className='border-2 border-[#A6A6A6] px-2 h-12 text-md  text-center rounded-2xl transition duration-300 hover:border-custom-blue' value={gender} onChange={(e) => setGender(e.target.value)}>
               <option value="" className='hidden'>성별</option>

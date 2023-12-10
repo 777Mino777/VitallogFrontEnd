@@ -46,7 +46,7 @@ const UserPage = () => {
   });
 
   return (
-    <div className="max-w-[1820px] mx-auto">
+    <div className="page-hi max-w-[1820px] mx-auto">
       <div className="flex flex-col min-h-screen text-gray-800">
         <header className="p-2 sm:p-6">
           <VlogNav />

@@ -37,6 +37,81 @@ code {
   margin-left: -60px;
 }
 
+/* .vlog-nav {
+  display : flex;
+  align-items : center;
+  gap : 1rem;
+} */
+
+.vlog-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vitallog-logo:hover + .menu-item,
+.vitallog-logo:hover ~ .menu-item {
+  transform: translateX(px);
+  opacity: 1;
+}
+
+.vitallog-logo {
+  font-size : 2rem;
+  cursor: pointer;
+  transition: transform 1s ease;
+}
+
+.menu-item {
+  font-size : 1rem;
+  transition: transform 1s ease, opacity 0.5s ease;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+}
+
+.login-button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background-color 0.3s ease;
+}
+
+.active {
+  background-color: #f0f0f0;
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .4;
+    }
+}
+
+@keyframes hi {
+  0% {
+      opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse {
+    animation: pulse 4s cubic-bezier(0.1, 0, 0.9, 1) infinite;
+}
+
+.page-hi {
+  animation: hi 1s ease-out;
+}
+/* .animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+} */
+
+/* @keyframes slideMenuItems {
+  to {
+    transform : translateX(100px);
+  }
+} */
+
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
