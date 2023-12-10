@@ -73,9 +73,9 @@ const TodayLogPage = () => {
         <SideBar page={"today"} />
         <main className="mx-10 p-10 border-2	w-full rounded-lg shadow">
           <div className="h-full">
-            <div className="text-2xl font-bold">오늘의 로그 기록하기</div>
+            <div className="font-yg-jalnan text-2xl font-bold">오늘의 로그 기록하기</div>
             <div className="h-full py-10 text-center">
-              <div className="grid grid-cols-2 h-full gap-1 p-10 px-20 border border-[#000] rounded-lg">
+              <div className="grid grid-cols-2 h-full gap-1 p-10 px-20  rounded-lg">
                 <div className="p-5  flex flex-col justify-center ">
                   <div className="flex justify-start text-lg font-bold mb-3">날짜</div>
                   <input className="border border-[#000] h-10 rounded-full text-center w-full" value={getDate()} readOnly />

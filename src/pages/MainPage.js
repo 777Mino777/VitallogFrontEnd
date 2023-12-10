@@ -20,7 +20,7 @@ const MainPage = () => {
                 </header>
                 <main className="grow flex flex-col my-auto justify-center items-center text-center mr-10">
                     <h1 className="text-xl sm:text-7xl font-bold mb-16">
-                        <div>Your Health, Your <span className="text-custom-blue">VitalLog</span></div>
+                        <div>Your Health, Your <span className="animate-pulse text-custom-blue">VitalLog</span></div>
                     </h1>
                     <div className="mb-16">
                         <p className="text-md sm:text-xl mb-4 text-[#555555] font-bold ">강한 몸을 만들고, 다른 나로 나아가는 여정을 기록하세요.</p>

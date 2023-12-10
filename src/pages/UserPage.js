@@ -52,7 +52,7 @@ const UserPage = () => {
           <VlogNav />
         </header>
         <main className="grow flex justify-center items-center">
-          <div className=" h-[680px] grid grid-cols-1 lg:grid-cols-2 gap-5 mx-20 px-20 items-center">
+          <div className="h-[680px] grid grid-cols-1 lg:grid-cols-2 gap-5 mx-20 px-20 items-center">
             <div className="order-2 lg:order-1 flex flex-col justify-between bg-[url('./images/main.jpg')] bg-cover h-full p-10 mr-10 rounded-xl shadow-md">
               <div className="items-center">
                 <div className="font-yg-jalnan text-2xl font-bold text-[#666666] mt-4">
@@ -91,7 +91,7 @@ const UserPage = () => {
             <div className="order-1 flex-grow flex flex-col justify-center items-center text-center sm:p-20">
               <h1 className="text-xl sm:text-7xl font-extrabold">
                 <div className="mb-4">Your Health,</div>
-                <div className="">Your <span className="text-custom-blue">VitalLog</span></div>
+                <div className="">Your <span className="animate-pulse text-custom-blue">VitalLog</span></div>
               </h1>
               <div className="py-10">
                 <p className="text-md sm:text-lg my-3 sm:my-1 font-bold">강한 몸을 만들고, 다른 나로 나아가는 여정을 기록하세요.</p>

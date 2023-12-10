@@ -40,7 +40,7 @@ const TotalPage = () => {
         <SideBar page={"total"} />
         <main className="mx-10 p-10 border-2 w-full  rounded-lg shadow">
           <div className="h-full overflow-auto">
-            <div className="text-2xl font-bold">전체 로그보기</div>
+            <div className="font-yg-jalnan text-2xl font-bold">전체 로그보기</div>
             <div className="flex justify-center  items-center">
               <div className="w-[1020px]">
                 <LogChart caption="Total Log" logData={dailyTotalLog}/>

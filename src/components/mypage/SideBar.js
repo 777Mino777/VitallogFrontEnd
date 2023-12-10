@@ -75,11 +75,11 @@ const SideBar = ({ page }) => {
       .catch((err) => console.log("err"));
   }, []);
   return (
-    <aside className="p-5 w-[350px] flex flex-col gap-3 border-2 border-[#363636] bg-[#EBEBEB] rounded-lg  items-center">
+    <aside className="p-5 w-[360px] flex flex-col gap-3 border-2 shadow-md bg-[#EBEBEB] rounded-lg  items-center">
       <div className="mt-7 border-2 rounded-full p-2 border-black bg-white">
         <RunningMan2 width={100} height={100} />
       </div>
-      <div className="mt-2 text-2xl text-center font-semibold">
+      <div className="font-yg-jalnan mt-2 text-xl text-[#575757] text-center font-semibold">
         {localStorage.getItem("name")}님의 VitalLog
       </div>
       <div className="flex flex-col h-[130px] bg-white rounded-md w-full mt-3 leading-9 justify-center">

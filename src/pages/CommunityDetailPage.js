@@ -9,8 +9,8 @@ const CommunityDetailPage = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { postid } = useParams();
-
+  const postid = useParams().postid;
+  const postCategory = useParams().category;
   const [comments, setComments] = useState([]);
   // const [newComment, setNewComment] = useState('');
 
@@ -18,9 +18,29 @@ const CommunityDetailPage = () => {
   const Authorization = localStorage.getItem('token')
   const userid = localStorage.getItem('id');
 
+  const categoryNames = {
+    daily: "일상",
+    proud: "자랑",
+    question: "질문",
+    recruit: "모집",
+    tip: "꿀팁",
+  }
+
+  const categoryColors = {
+    daily: "text-cyan-500",
+    proud: "text-sky-700",
+    question: "text-red-300",
+    recruit: "text-teal-500",
+    tip: "text-amber-400",
+  }
+
   const navigate = useNavigate();
 
   let isCancelled = false;
+
+  // useEffect(() => {
+  //   console.log("이히힝", postid, postCategory)
+  // }, [])
 
   useEffect(() => {
 
@@ -133,15 +153,15 @@ const CommunityDetailPage = () => {
   const editComment = async (commentId, updatedContent) => {
     try {
       const response = await fetch(`http://10.125.121.216:8080/api/vitallog/community/${userid}/comments/${commentId}?contents=${encodeURIComponent(updatedContent)}`, {
-        method : 'PUT',
-        headers : {
-          'Authorization' : Authorization,
+        method: 'PUT',
+        headers: {
+          'Authorization': Authorization,
         },
       });
       if (!response.ok) throw new Error('Network response was not ok');
 
       setComments(comments.map(comment =>
-        comment.id === commentId ? { ...comment, contents : updatedContent } : comment));
+        comment.id === commentId ? { ...comment, contents: updatedContent } : comment));
     } catch (error) {
       setError(error.message);
     }
@@ -156,25 +176,33 @@ const CommunityDetailPage = () => {
         <header className="p-6">
           <VlogNav isUserPage={true} />
         </header>
-        <main className="font-omyu_pretty rounded-2xl mx-80 mt-20 bg-white border-4 border-sky-150 justify-center items-center text-center">
+        <main className="shadow-lg rounded-2xl mx-80 mt-20 bg-white border-2 border-gray-200 justify-center items-center text-center">
           {post && (
             <div>
-              <h1 className="border-b-4 w-[100%] text-white border-custom-blue bg-custom-blue py-2 rounded-t-lg text-3xl font-bold">{post.title}</h1>
-              <div className='flex justify-between border-b-4'>
-                <div className='flex items-center justify-center w-24 rounded-xl font-extrabold bg-white' >작성자 : {post.writer}</div>
-                <div className='flex text-gray-700 items-center justify-center font-bold text-2xl mb-10 w-24'>조회수 : {post.visitcount}</div>
+
+              <h1 className="border-b-4 w-[100%] text-white border-custom-blue bg-custom-blue py-2 rounded-t-lg text-2xl font-bold">{post.title}</h1>
+              <div className='px-10'>
+                <div className='flex justify-between border-b-2'>
+                  <div className="flex">
+                    <div className={`font-bold font-omyu_pretty mt-5 text-xl mr-2 ${categoryColors[postCategory]}`}>{categoryNames[postCategory]}</div>
+                    <div className='font-omyu_pretty flex w-[7rem] mt-5 mb-3 text-xl rounded-xl font-extrabold bg-white' >작성자 : {post.writer}</div>
+                  </div>
+                  <div className='font-omyu_pretty flex text-gray-700 font-bold text-xl mt-5 mb-3 mr-2'>조회수 : {post.visitcount}</div>
+                </div>
+                <div className=''>
+                  <div className="overflow-auto break-all	mt-5 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-md">{post.contents}</div>
+                  <p className="font-omyu_pretty text-gray-400 text-xl text-right mt-2 mb-4">{new Date(post.createDate).toLocaleDateString()}</p>
+                </div>
+                <div className='flex justify-end mb-12'>
+                  {post.writer === userid && (
+                    <button onClick={() => navigate(`/community/edit/${postid}`, { state: { post } })}
+                      className="font-omyu_pretty border-gray-400 bg-white border-2 py-1 text-gray-400 text-xl mr-8 px-8  rounded-xl transition duration-300 hover:border-black hover:text-black" >수 정</button>
+                  )}
+                  {post.writer === userid && (
+                    <button onClick={deletePost} className="font-omyu_pretty border-gray-400 bg-white text-xl border-2 text-gray-400 px-8 py-1 rounded-xl transition duration-300 hover:border-black hover:text-black">삭 제</button>
+                  )}
+                </div>
               </div>
-              <div className=''>
-                <div className="overflow-auto break-all	 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-lg">{post.contents}</div>
-                <p className="font-bold text-2xl text-right mt-12">{new Date(post.createDate).toLocaleDateString()}</p>
-              </div>
-              {post.writer === userid && (
-                <button onClick={() => navigate(`/community/edit/${postid}`, { state: { post } })}
-                  className="border-green-500 bg-white border-4 text-green-700 mx-2 p-2 rounded transition duration-300 hover:bg-white hover:border-green-500 hover:text-green-500" >게시물 수정</button>
-              )}
-              {post.writer === userid && (
-                <button onClick={deletePost} className="border-red-500 bg-white border-4 text-red-700 p-2 rounded transition duration-300 hover:bg-white hover:border-red-500 hover:text-red-500">게시물 삭제</button>
-              )}
             </div>
           )}
         </main>

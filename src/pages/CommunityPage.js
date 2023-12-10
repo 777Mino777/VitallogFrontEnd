@@ -68,8 +68,9 @@ const CommunityPage = () => {
     navigate("/community/write")
   }
 
-  const handlePostClick = (postid) => {
-    navigate(`/community/detail/${postid}`);
+  const handlePostClick = (postid, postcategory) => {
+    console.log("asdsaasdasdasdasds",postcategory)
+    navigate(`/community/detail/${postid}/${postcategory}`);
   }
 
   const handleSearch = () => {
@@ -116,7 +117,7 @@ const CommunityPage = () => {
         <div className="flex w-full mt-24 justify-between">
           <div className="">
             <div className="flex justify-end w-full">
-              <button onClick={handleCommunityWrite} className="font-extrabold text-xl mb-5 py-2 px-8 rounded-xl border-2 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
+              <button onClick={handleCommunityWrite} className="animate-pulse font-extrabold text-xl mb-5 py-2 px-8 rounded-xl border-2 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
                 글쓰기
               </button>
             </div>
@@ -156,7 +157,7 @@ const CommunityPage = () => {
             {filteredPosts.map((post) => (
               <button
                 key={post.id}
-                onClick={() => handlePostClick(post.id)}
+                onClick={() => handlePostClick(post.id, post.category)}
                 className={`overflow-hidden shadow-lg shadow-gray-400 border-1 rounded-xl bg-white mb-4 w-72 border-gray-300 transition duration-300 hover:scale-95 flex flex-col justify-between}`}
               >
                 <div key={post.id} className="h-32 w-full">
@@ -170,7 +171,7 @@ const CommunityPage = () => {
                 <div className="h-20 mb-10 ">
                   <p className="w-60 inline-block text-md ml-4 mt-5 mb-10 text-gray-400 truncate text-start">{post.contents}</p>
                 </div>
-                <div className="flex justify-around px-4 py-5">
+                <div className="flex justify-around pl-[0.9rem] pr-2 py-5">
                   <div className="flex items-end pr-24">
                     <span className="font-omyu_pretty text-xs pr-3" >&nbsp;{post.createDate}</span>
                     <span className="font-omyu_pretty text-xs pr-4 ">👁&nbsp;{post.visitcount}</span>

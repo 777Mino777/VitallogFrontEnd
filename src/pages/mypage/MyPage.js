@@ -41,7 +41,7 @@ const MyPage = () => {
         <SideBar page={"mypage"} />
         <main className="mx-10 p-10 border-2	w-full rounded-lg shadow">
           <div className="h-full">
-            <div className="text-2xl font-bold">오늘의 로그보기</div>
+            <div className="font-yg-jalnan text-2xl font-bold">오늘의 로그보기</div>
             <div className="h-full flex justify-center items-center">
               { userlog &&  <LogCardList data={userlog} />}
             </div>

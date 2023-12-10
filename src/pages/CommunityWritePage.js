@@ -96,10 +96,9 @@ const CommunityWritePage = () => {
                             </div>
 
                         </div>
-                        {titleError && <div className="text-red-500 text-sm">{titleError}</div>}
+                        
                         
                         <div className="flex">
-                            
                             <div className="w-full">
                             <label htmlFor="title" className="mb-4 w-12 block border-b-2 border-sky-300 text-black text-lg font-extrabold">제목</label>
                             <input
@@ -111,14 +110,15 @@ const CommunityWritePage = () => {
                                 className="placeholder:text-gray-300 px-2 text-xl py-2 placeholder-center font-extrabold rounded-lg border-t-2 border-b-2 w-[100%] block bg-white border-sky-300 shadow-sm"
                                 placeholder="제목을 입력하세요"
                                 required
-                            />
+                                />
+                                {titleError && <div className="tooltip">{titleError}</div>}
                             </div>
                             <div className="flex mt-10">
                             <label htmlFor="category" className="" ></label>
                             <select
                                 id="category"
                                 value={category}
-                                onChange={handleContentsChange}
+                                onChange={(e) => setCategory(e.target.value)}
                                 className="border-2 font-bold text-black border-sky-700 rounded-xl px-4 py-2 mt-2 ml-4"
                             >
                                 <option value="daily">일상</option>
@@ -129,7 +129,6 @@ const CommunityWritePage = () => {
                             </select>
                             </div>
                         </div>
-                        {contentsError && <div className="text-red-500 text-sm">{contentsError}</div>}
                         <div className="">
                             <label htmlFor="contents" className="border-b-2 border-sky-300 mt-4 mb-4 w-12 block text-lg font-extrabold text-black">내용</label>
                             <textarea
@@ -137,11 +136,12 @@ const CommunityWritePage = () => {
                                 name="contents"
                                 rows={15}
                                 value={contents}
-                                onChange={(e) => setContents(e.target.value)}
+                                onChange={handleContentsChange}
                                 className="placeholder:text-gray-300 px-2 bg-white placeholder-center font-extrabold rounded-lg border-y-2 mr-24 block w-full border-sky-300 shadow-sm"
                                 placeholder="내용을 입력하세요"
                                 required
-                            />
+                                />
+                                {contentsError && <div className="tooltip">{contentsError}</div>}
                         </div>
                         <div className="flex justify-end">
                             <button

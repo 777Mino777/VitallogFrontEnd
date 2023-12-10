@@ -51,7 +51,7 @@ const PeriodPage = () => {
         <SideBar page={"period"} />
         <main className="mx-10 p-10 border-2	w-full rounded-lg shadow">
           <div className="h-full overflow-auto">
-            <div className="text-2xl font-bold">기간별 로그보기</div>
+            <div className="font-yg-jalnan  text-2xl font-bold">기간별 로그보기</div>
             <div className="mt-5">
               <input type="date" ref={fromDate} className="border rounded-full p-1 px-3" />
               <span className="mx-2 font-bold">~</span>
