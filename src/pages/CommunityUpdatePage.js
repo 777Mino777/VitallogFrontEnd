@@ -91,9 +91,9 @@ const CommunityUpdatePage = () => {
                         <div className="flex justify-end">
                             <button
                                 type="submit"
-                                className="font-omyu_pretty w-28 mt-4 flex justify-center py-1 border-4 border-custom-blue text-xl font-extrabold rounded-md text-white bg-custom-blue transition duration-300 hover:text-custom-blue hover:bg-white"
+                                className="font-omyu_pretty w-28 mt-4 flex justify-center py-1 border-2 border-custom-blue text-xl font-extrabold rounded-md text-white bg-custom-blue transition duration-300 hover:text-custom-blue hover:bg-white"
                             >
-                                수정
+                                수 정
                             </button>
                         </div>
                     </form>

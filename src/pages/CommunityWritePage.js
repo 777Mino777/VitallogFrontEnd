@@ -88,7 +88,7 @@ const CommunityWritePage = () => {
                     <VlogNav isUserPage={true} />
                 </header>
 
-                <main className="shadow-lg rounded-2xl mx-60 mt-20 bg-white border-2 border-gray-200 justify-center items-center text-center">
+                <main className="mb-10 shadow-lg rounded-2xl mx-60 mt-20 bg-white border-2 border-gray-200 justify-center items-center text-center">
                     <div className="border-t-2 bg-custom-blue font-bold text-2xl text-white rounded-t-xl px-2 py-2 border-custom-blue">글쓰기</div>
                     <form onSubmit={handleSubmit} className="mb-4 mx-16 flex-col justify-start">
                         <div className="mt-2 flex justify-end text-base">

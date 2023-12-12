@@ -125,7 +125,7 @@ const CommunityPage = () => {
               <select
                 value={searchType}
                 onChange={(e) => setSearchType(e.target.value)}
-                className="text-center px-2 ml-12 rounded-lg py-3 text-base border-2 border-[#D9D9D9]"
+                className="text-center px-2 ml-12 rounded-lg py-3 text-base border-2 border-[#d9d9d9]"
               >
                 <option value="all">전체</option>
                 <option value="title">제목</option>
@@ -136,7 +136,7 @@ const CommunityPage = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="검색어 입력"
-                className="text-base w-[59rem] ml-5 px-4 placeholder:text-center border-2 border-[#D9D9D9] py-3 rounded-lg"
+                className="text-base w-[59rem] ml-3 px-4 placeholder:text-center border-2 border-[#D9D9D9] py-3 rounded-lg"
               />
               <button
 

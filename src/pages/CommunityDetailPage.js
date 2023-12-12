@@ -185,7 +185,7 @@ const CommunityDetailPage = () => {
         <main className="shadow-lg rounded-2xl mx-80 mt-20 bg-white border-2 border-gray-200 justify-center items-center text-center">
           {post && (
             <div>
-
+              
               <div className="px-4 items-center flex border-b-4 w-[100%] border-custom-blue bg-custom-blue py-2 rounded-t-lg ">
                 <div onClick={handleBackToCommunity} className="cursor-pointer mr-4 text-white text-2xl"><IoCaretBackOutline /></div>
                 <div className="w-full text-xl font-bold text-white">{post.title}</div>
@@ -199,7 +199,7 @@ const CommunityDetailPage = () => {
                   <div className='font-omyu_pretty flex text-gray-700 font-bold text-xl mt-5 mb-3 mr-2'>조회수 : {post.visitcount}</div>
                 </div>
                 <div className=''>
-                  <div className="overflow-auto break-all	mt-5 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-md"><pre>{post.contents}</pre></div>
+                  <div className="overflow-auto break-all	mt-5 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-md"><pre className="">{post.contents}</pre></div>
                   <p className="font-omyu_pretty text-gray-400 text-xl text-right mt-2 mb-4">{new Date(post.createDate).toLocaleDateString()}</p>
                 </div>
                 <div className='flex justify-end mb-12'>

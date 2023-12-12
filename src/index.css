@@ -95,15 +95,34 @@ code {
 .page-hi {
   animation: hi 1s ease-out;
 }
-/* .animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-} */
 
-/* @keyframes slideMenuItems {
-  to {
-    transform : translateX(100px);
-  }
-} */
+@keyframes borderSparkle {
+  0% { border-color: #0085C9; }
+  10% { border-color: #054c70;}
+  20% { border-color: #0085C9; }
+  30% { border-color: #054c70;}
+  40% { border-color: #0085C9; }
+  50% { border-color: #054c70;}
+  60% { border-color: #0085C9; }
+  70% { border-color: #054c70;}
+  80% { border-color: #0085C9; }
+  90% { border-color: #054c70;}
+  100% { border-color: #0085C9; }
+}
+
+@keyframes textSparkle {
+  0% { color : #0085C9; }
+  50% { color : #74b0ce;}
+  100% { color : #0085C9; }
+}
+
+.sparkle-border {
+  animation: borderSparkle 6s infinite;
+}
+
+.sparkle-text {
+  animation: textSparkle 1.5s infinite;
+}
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
@@ -111,6 +130,32 @@ code {
 
 html{
   overflow: scroll;
+}
+
+.gradient-background {
+  position: relative;
+}
+
+.gradient-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, #0085C9, #fff);
+  opacity: 0;
+  animation: fadeEffect 8s infinite;
+}
+
+.gradient-layer:nth-child(2) {
+  background: linear-gradient(to bottom, #0085C9, #fff);
+  animation-delay: 4s;
+}
+
+@keyframes fadeEffect {
+  0% { opacity: 0;} 
+  50% { opacity: 1;}
+  100% { opacity: 0;}
 }
 
 @font-face {

@@ -82,7 +82,9 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="flex min-h-screen bg-custom-gradient justify-center items-center">
+        <div className="bg-custom-gradient gradient-background flex min-h-screen justify-center items-center">
+            <div className="gradient-layer"></div>
+            <div className="gradient-layer"></div>
             <div className="p-14 bg-white rounded-xl shadow-md relative py-24 sm:w-1/4 md:w-2/3 lg:w-1/2 xl:w-1/4 3xl:w-1/5">
                 <h1 onClick={backToMainPage} className="text-center hover:cursor-pointer hover:scale-x-110 transition-all hover:text-custom-blue text-5xl font-bold mb-4">Vital Log</h1>
                 <h2 className="text-center text-xl font-bold mb-8">Sign up</h2>
