@@ -60,11 +60,14 @@ const SideBar = ({ page }) => {
       .then((resp) => resp.json())
       .then((data) => {
         setData(data);
-
+        const time = data.totalExerTime === null? `0 min`:
+          data.totalExerTime>=60?
+          `${Math.floor(data.totalExerTime/60)}h ${data.totalExerTime%60}m`
+          : `${data.totalExerTime}min`;
         let todayTotalLog = (
           <ul className="text-center">
             <li className="text-2xl">{getDate()}</li>
-            <li>{data.totalExerTime === null ? 0 : data.totalExerTime} min </li>
+            <li>{time}</li>
             <li>{data.totalKcal.toFixed(2)} kcal</li>
           </ul>
         );

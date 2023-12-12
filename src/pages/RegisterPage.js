@@ -12,6 +12,7 @@ const RegisterPage = () => {
     const [modalMessage, setModalMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isIdValid, setIsIdValid] = useState(null || '');
 
     const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ const RegisterPage = () => {
     const backToLoginPage = () => {
         navigate("/login");
     }
+
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -59,7 +61,24 @@ const RegisterPage = () => {
             setModalMessage('중복된 정보가 있습니다.');
             setShowModal(true);
         }
-        
+
+    };
+    const checkIdAvailability = async (e) => {
+        e.preventDefault();
+
+        if (!id.trim()) {
+            setIsIdValid(null);
+            return;
+        }
+
+        console.log("ee")
+        try {
+            const response = await axios.get(`http://10.125.121.216:8080/api/vitallog/check-id?id=${id}`);
+            console.log(response)
+            setIsIdValid(response.status === 200);
+        } catch (error) {
+            setIsIdValid(false);
+        }
     };
 
     return (
@@ -68,14 +87,33 @@ const RegisterPage = () => {
                 <h1 onClick={backToMainPage} className="text-center hover:cursor-pointer hover:scale-x-110 transition-all hover:text-custom-blue text-5xl font-bold mb-4">Vital Log</h1>
                 <h2 className="text-center text-xl font-bold mb-8">Sign up</h2>
                 <form onSubmit={handleRegister}>
-                    <InputField
-                        label="ID"
-                        id="id"
-                        type="text"
-                        placeholder="아이디를 입력하세요."
-                        value={id}
-                        onChange={(e) => setId(e.target.value)}
-                    />
+                    <div className="mb-4">
+                        <div className="flex">
+                            <label htmlFor="id" className="block text-start text-gray-700 text-sm font-bold mb-2" >
+                                ID
+                            </label>
+
+                            {isIdValid === null || id === '' ? '' :
+                                isIdValid ?
+                                    <div className="ml-4 w-[10rem] mt-[0.2rem] text-xs text-green-600">사용가능한 아이디입니다.</div> :
+                                    <div className="ml-4 w-[10rem] mt-[0.2rem] text-xs text-red-600">중복된 아이디가 있습니다.</div>}
+                        </div>
+                        <input
+                            type="text"
+                            id="id"
+                            className="shadow-md appearance-none border-4 border-gray-400 rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            placeholder="아이디를 입력하세요."
+                            value={id}
+                            onChange={(e) => {
+                                setId(e.target.value);
+                                if (e.target.value === '') {
+                                    setIsIdValid(null);
+                                }
+                            }}
+                            onBlur={checkIdAvailability}
+                        />
+                    </div>
+
                     <InputField
                         label="PASSWORD"
                         id="password"
@@ -84,7 +122,7 @@ const RegisterPage = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                     <InputField
+                    <InputField
                         label="CONFIRM PASSWORD"
                         id="confirmpassword"
                         type="password"
@@ -114,8 +152,8 @@ const RegisterPage = () => {
                         </button>
                     </div>
                     <div className="text-center">
-                        <button onClick={backToLoginPage} 
-                                className="inline-block
+                        <button onClick={backToLoginPage}
+                            className="inline-block
                                  mt-5 align-baseline
                                  font-bold text-sm
                                  text-blue-500 hover:text-blue-800">

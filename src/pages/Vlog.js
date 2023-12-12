@@ -28,7 +28,7 @@ const Vlog = () => {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/write" element={<CommunityWritePage />} />
-          <Route path="/community/edit/:postid" element={<CommunityUpdatePage />} />
+          <Route path="/community/edit/:postid/:category" element={<CommunityUpdatePage />} />
           <Route path="/community/detail/:postid/:category" element={<CommunityDetailPage />} />
           <Route path="/information" element={<InformationPage />} />
           <Route path="/" element={<MainPage />} />

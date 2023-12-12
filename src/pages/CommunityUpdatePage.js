@@ -9,7 +9,7 @@ const CommunityUpdatePage = () => {
     const location = useLocation();
     const { post } = location.state || {};
     const { postid } = useParams();
-    const { postcategory } = useParams();
+    const { category } = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState(post?.title || '');
     const [contents, setContents] = useState(post?.contents || '');
@@ -36,7 +36,7 @@ const CommunityUpdatePage = () => {
         })
             .then(response => {
                 console.log(response);
-                navigate(`/community/detail/${postid}/${postcategory}`);
+                navigate(`/community/detail/${postid}/${category}`);
             })
             .then((data) => data)
             .catch((error) => {
@@ -70,7 +70,7 @@ const CommunityUpdatePage = () => {
                                 name="title"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                className="px-2 text-md py-2 placeholder-center font-extrabold rounded-lg border-2 w-full block border-[#d9d9d9] shadow-sm"
+                                className="px-2 text-md py-2 placeholder-center rounded-lg border-2 w-full block border-[#d9d9d9] shadow-sm"
                                 placeholder="제목을 입력하세요"
                                 required
                             />
@@ -83,7 +83,7 @@ const CommunityUpdatePage = () => {
                                 rows={15}
                                 value={contents}
                                 onChange={(e) => setContents(e.target.value)}
-                                className="px-2 text-sm placeholder-center font-extrabold rounded-lg border-2 mr-24 block w-full border-[#d9d9d9] shadow-sm"
+                                className="resize-none px-2 text-sm placeholder-center rounded-lg border-2 mr-24 block w-full border-[#d9d9d9] shadow-sm"
                                 placeholder="내용을 입력하세요"
                                 required
                             />
@@ -93,7 +93,7 @@ const CommunityUpdatePage = () => {
                                 type="submit"
                                 className="font-omyu_pretty w-28 mt-4 flex justify-center py-1 border-4 border-custom-blue text-xl font-extrabold rounded-md text-white bg-custom-blue transition duration-300 hover:text-custom-blue hover:bg-white"
                             >
-                                수정하기
+                                수정
                             </button>
                         </div>
                     </form>

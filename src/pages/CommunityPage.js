@@ -114,10 +114,10 @@ const CommunityPage = () => {
         <header className="p-6">
           <VlogNav isUserPage={true} />
         </header>
-        <div className="flex w-full mt-24 justify-between">
+        <div className="flex w-full mt-10 justify-between">
           <div className="">
             <div className="flex justify-end w-full">
-              <button onClick={handleCommunityWrite} className="animate-pulse font-extrabold text-xl mb-5 py-2 px-8 rounded-xl border-2 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
+              <button onClick={handleCommunityWrite} className="font-extrabold text-xl mb-5 py-2 px-8 rounded-xl border-2 border-custom-blue bg-white text-custom-blue transition duration-700 hover:text-white hover:bg-custom-gradient hover:border-sky-100 ">
                 글쓰기
               </button>
             </div>
@@ -136,7 +136,7 @@ const CommunityPage = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="검색어 입력"
-                className="text-base w-[59rem] ml-5 px-2 placeholder:text-center border-2 border-[#D9D9D9] pl-1 py-3 rounded-lg"
+                className="text-base w-[59rem] ml-5 px-4 placeholder:text-center border-2 border-[#D9D9D9] py-3 rounded-lg"
               />
               <button
 

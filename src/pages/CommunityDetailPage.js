@@ -4,6 +4,7 @@ import VlogNav from './VlogNav';
 import CommentWrite from '../components/CommentWrite';
 import CommentList from '../components/CommentList';
 import { useNavigate } from 'react-router-dom';
+import { IoCaretBackOutline } from "react-icons/io5";
 
 const CommunityDetailPage = () => {
   const [post, setPost] = useState(null);
@@ -32,6 +33,11 @@ const CommunityDetailPage = () => {
     question: "text-red-300",
     recruit: "text-teal-500",
     tip: "text-amber-400",
+  }
+
+  const handleBackToCommunity = (e) => {
+    e.preventDefault();
+    navigate("/community")
   }
 
   const navigate = useNavigate();
@@ -180,7 +186,10 @@ const CommunityDetailPage = () => {
           {post && (
             <div>
 
-              <h1 className="border-b-4 w-[100%] text-white border-custom-blue bg-custom-blue py-2 rounded-t-lg text-2xl font-bold">{post.title}</h1>
+              <div className="px-4 items-center flex border-b-4 w-[100%] border-custom-blue bg-custom-blue py-2 rounded-t-lg ">
+                <div onClick={handleBackToCommunity} className="cursor-pointer mr-4 text-white text-2xl"><IoCaretBackOutline /></div>
+                <div className="w-full text-xl font-bold text-white">{post.title}</div>
+              </div>
               <div className='px-10'>
                 <div className='flex justify-between border-b-2'>
                   <div className="flex">
@@ -190,12 +199,12 @@ const CommunityDetailPage = () => {
                   <div className='font-omyu_pretty flex text-gray-700 font-bold text-xl mt-5 mb-3 mr-2'>조회수 : {post.visitcount}</div>
                 </div>
                 <div className=''>
-                  <div className="overflow-auto break-all	mt-5 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-md">{post.contents}</div>
+                  <div className="overflow-auto break-all	mt-5 flex h-[20rem] p-2 text-start border-4 border-white bg-white rounded-xl text-md"><pre>{post.contents}</pre></div>
                   <p className="font-omyu_pretty text-gray-400 text-xl text-right mt-2 mb-4">{new Date(post.createDate).toLocaleDateString()}</p>
                 </div>
                 <div className='flex justify-end mb-12'>
                   {post.writer === userid && (
-                    <button onClick={() => navigate(`/community/edit/${postid}`, { state: { post } })}
+                    <button onClick={() => navigate(`/community/edit/${postid}/${postCategory}`, { state: { post } })}
                       className="font-omyu_pretty border-gray-400 bg-white border-2 py-1 text-gray-400 text-xl mr-8 px-8  rounded-xl transition duration-300 hover:border-black hover:text-black" >수 정</button>
                   )}
                   {post.writer === userid && (

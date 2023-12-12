@@ -92,7 +92,7 @@ const CommunityWritePage = () => {
                     <div className="border-t-2 bg-custom-blue font-bold text-2xl text-white rounded-t-xl px-2 py-2 border-custom-blue">글쓰기</div>
                     <form onSubmit={handleSubmit} className="mb-4 mx-16 flex-col justify-start">
                         <div className="mt-2 flex justify-end text-base">
-                            <label htmlFor="writer" className="font-omyu_pretty mr-6 mt-4 font-extrabold text-[#b8b6b6]">작성자 : {writer}</label>
+                            <label htmlFor="writer" className="font-omyu_pretty text-lg mt-4 font-extrabold text-[#b8b6b6]">작성자 : {writer}</label>
                         </div>
                         <div className="flex">
                             <div className="w-full">
@@ -117,11 +117,11 @@ const CommunityWritePage = () => {
                                     name="title"
                                     value={title}
                                     onChange={handleTitleChange}
-                                    className="placeholder:text-gray-300 px-2 text-base py-2 placeholder-center font-extrabold rounded-lg border-2 w-[100%] block bg-white border-[#D9D9D9] shadow-sm"
-                                    placeholder="제목을 입력하세요"
+                                    className="placeholder:text-gray-300 px-2 text-base py-2 placeholder-center rounded-lg border-2 w-[100%] block bg-white border-[#D9D9D9] shadow-sm"
+                                    placeholder="제목을 입력하세요 ( 최대 50자 이내 )"
                                     required
                                     />
-                                {titleError && <div className="tooltip">{titleError}</div>}
+                                {/* {titleError && <div className="tooltip">{titleError}</div>} */}
                                     </div>
                             </div>
                         </div>
@@ -133,11 +133,11 @@ const CommunityWritePage = () => {
                                 rows={15}
                                 value={contents}
                                 onChange={handleContentsChange}
-                                className="placeholder:text-gray-300 px-2 bg-white placeholder-center font-extrabold rounded-lg border-2 mr-24 block w-full border-[#D9D9D9] shadow-sm"
-                                placeholder="내용을 입력하세요"
+                                className="resize-none h- placeholder:text-gray-300 px-2 bg-white placeholder-center rounded-lg border-2 mr-24 block w-full border-[#D9D9D9] shadow-sm"
+                                placeholder="내용을 입력하세요 ( 최대 2000자 이내 )"
                                 required
                             />
-                            {contentsError && <div className="tooltip">{contentsError}</div>}
+                            {/* {contentsError && <div className="tooltip">{contentsError}</div>} */}
                         </div>
                         <div className="flex justify-between mt-6">
                             <div className="font-omyu_pretty mt-2 mx-2 text-lg font-extrabold text-[#0404040]">
