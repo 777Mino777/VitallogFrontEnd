@@ -4,7 +4,7 @@ const Modal = ({ title, children, onClose }) => {
         <div className="border-4 rounded-lg bg-white shadow-lg">
           <div className="px-4 bg-custom-blue text-white flex justify-between items-center">
             <h2 className="text-lg font-semibold">{title}</h2>
-            <button onClick={onClose} className="text-xl font-bold hover:text-black">×</button>
+            <button onClick={onClose} className="ml-2 text-xl font-bold hover:text-black">×</button>
           </div>
           <div className="text-sm mt-4 p-4">
             {children}
